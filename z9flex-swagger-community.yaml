@@ -1,0 +1,4644 @@
+openapi: 3.0.1
+info:
+  title: Z9/Flex JSON/REST API - Community Profile - OpenAPI 3.0
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: "1.1"
+paths:
+  /actuator/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete Actuator
+      operationId: deleteActuator
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /actuator/list:
+    get:
+      tags:
+      - Dev
+      summary: List Actuator
+      operationId: listActuator
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /actuator/save:
+    post:
+      tags:
+      - Dev
+      summary: Save Actuator
+      operationId: saveActuator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /actuator/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update Actuator
+      operationId: updateActuator
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /authenticate:
+    post:
+      tags:
+      - Authentication
+      summary: Authenticate user and obtain token
+      operationId: authenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticateResult"
+  /basicDataLayout/delete/{id}:
+    post:
+      tags:
+      - DataLayout
+      summary: Delete BasicDataLayout
+      operationId: deleteBasicDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /basicDataLayout/list:
+    get:
+      tags:
+      - DataLayout
+      summary: List BasicDataLayout
+      operationId: listBasicDataLayout
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataLayoutListResponse"
+      security:
+      - APIKeyAuth: []
+  /basicDataLayout/save:
+    post:
+      tags:
+      - DataLayout
+      summary: Save BasicDataLayout
+      operationId: saveBasicDataLayout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataLayout"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
+  /basicDataLayout/update/{id}:
+    post:
+      tags:
+      - DataLayout
+      summary: Update BasicDataLayout
+      operationId: updateBasicDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataLayout"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
+  /binaryFormat/delete/{id}:
+    post:
+      tags:
+      - DataFormat
+      summary: Delete BinaryFormat
+      operationId: deleteBinaryFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /binaryFormat/list:
+    get:
+      tags:
+      - DataFormat
+      summary: List BinaryFormat
+      operationId: listBinaryFormat
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataFormatListResponse"
+      security:
+      - APIKeyAuth: []
+  /binaryFormat/save:
+    post:
+      tags:
+      - DataFormat
+      summary: Save BinaryFormat
+      operationId: saveBinaryFormat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFormat"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
+  /binaryFormat/update/{id}:
+    post:
+      tags:
+      - DataFormat
+      summary: Update BinaryFormat
+      operationId: updateBinaryFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFormat"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
+  /controller/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete Controller
+      operationId: deleteController
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /controller/list:
+    get:
+      tags:
+      - Dev
+      summary: List Controller
+      operationId: listController
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /controller/save:
+    post:
+      tags:
+      - Dev
+      summary: Save Controller
+      operationId: saveController
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /controller/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update Controller
+      operationId: updateController
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /cred/delete/{id}:
+    post:
+      tags:
+      - Cred
+      summary: Delete Cred
+      operationId: deleteCred
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Cred"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /cred/list:
+    get:
+      tags:
+      - Cred
+      summary: List Cred
+      operationId: listCred
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: privTypeRestriction.privTypes
+        in: query
+        description: PrivTypeRestriction PrivType value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/PrivType"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredListResponse"
+      security:
+      - APIKeyAuth: []
+  /cred/save:
+    post:
+      tags:
+      - Cred
+      summary: Save Cred
+      operationId: saveCred
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cred"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Cred"
+      security:
+      - APIKeyAuth: []
+  /cred/update/{id}:
+    post:
+      tags:
+      - Cred
+      summary: Update Cred
+      operationId: updateCred
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Cred"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cred"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Cred"
+      security:
+      - APIKeyAuth: []
+  /credReader/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete CredReader
+      operationId: deleteCredReader
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /credReader/list:
+    get:
+      tags:
+      - Dev
+      summary: List CredReader
+      operationId: listCredReader
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /credReader/save:
+    post:
+      tags:
+      - Dev
+      summary: Save CredReader
+      operationId: saveCredReader
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /credReader/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update CredReader
+      operationId: updateCredReader
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /credTemplate/delete/{id}:
+    post:
+      tags:
+      - CredTemplate
+      summary: Delete CredTemplate
+      operationId: deleteCredTemplate
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the CredTemplate"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /credTemplate/list:
+    get:
+      tags:
+      - CredTemplate
+      summary: List CredTemplate
+      operationId: listCredTemplate
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CredTemplateListResponse"
+      security:
+      - APIKeyAuth: []
+  /credTemplate/save:
+    post:
+      tags:
+      - CredTemplate
+      summary: Save CredTemplate
+      operationId: saveCredTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredTemplate"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/CredTemplate"
+      security:
+      - APIKeyAuth: []
+  /credTemplate/update/{id}:
+    post:
+      tags:
+      - CredTemplate
+      summary: Update CredTemplate
+      operationId: updateCredTemplate
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the CredTemplate"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CredTemplate"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/CredTemplate"
+      security:
+      - APIKeyAuth: []
+  /dataFormat/delete/{id}:
+    post:
+      tags:
+      - DataFormat
+      summary: Delete DataFormat
+      operationId: deleteDataFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /dataFormat/list:
+    get:
+      tags:
+      - DataFormat
+      summary: List DataFormat
+      operationId: listDataFormat
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataFormatListResponse"
+      security:
+      - APIKeyAuth: []
+  /dataFormat/save:
+    post:
+      tags:
+      - DataFormat
+      summary: Save DataFormat
+      operationId: saveDataFormat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFormat"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
+  /dataFormat/update/{id}:
+    post:
+      tags:
+      - DataFormat
+      summary: Update DataFormat
+      operationId: updateDataFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataFormat"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
+  /dataLayout/delete/{id}:
+    post:
+      tags:
+      - DataLayout
+      summary: Delete DataLayout
+      operationId: deleteDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /dataLayout/list:
+    get:
+      tags:
+      - DataLayout
+      summary: List DataLayout
+      operationId: listDataLayout
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataLayoutListResponse"
+      security:
+      - APIKeyAuth: []
+  /dataLayout/save:
+    post:
+      tags:
+      - DataLayout
+      summary: Save DataLayout
+      operationId: saveDataLayout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataLayout"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
+  /dataLayout/update/{id}:
+    post:
+      tags:
+      - DataLayout
+      summary: Update DataLayout
+      operationId: updateDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataLayout"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
+  /dev/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete Dev
+      operationId: deleteDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /dev/list:
+    get:
+      tags:
+      - Dev
+      summary: List Dev
+      operationId: listDev
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /dev/save:
+    post:
+      tags:
+      - Dev
+      summary: Save Dev
+      operationId: saveDev
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /dev/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update Dev
+      operationId: updateDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /door/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete Door
+      operationId: deleteDoor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /door/list:
+    get:
+      tags:
+      - Dev
+      summary: List Door
+      operationId: listDoor
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /door/save:
+    post:
+      tags:
+      - Dev
+      summary: Save Door
+      operationId: saveDoor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /door/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update Door
+      operationId: updateDoor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /doorAccessPriv/delete/{id}:
+    post:
+      tags:
+      - Priv
+      summary: Delete DoorAccessPriv
+      operationId: deleteDoorAccessPriv
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Priv"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /doorAccessPriv/list:
+    get:
+      tags:
+      - Priv
+      summary: List DoorAccessPriv
+      operationId: listDoorAccessPriv
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrivListResponse"
+      security:
+      - APIKeyAuth: []
+  /doorAccessPriv/save:
+    post:
+      tags:
+      - Priv
+      summary: Save DoorAccessPriv
+      operationId: saveDoorAccessPriv
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Priv"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Priv"
+      security:
+      - APIKeyAuth: []
+  /doorAccessPriv/update/{id}:
+    post:
+      tags:
+      - Priv
+      summary: Update DoorAccessPriv
+      operationId: updateDoorAccessPriv
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Priv"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Priv"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Priv"
+      security:
+      - APIKeyAuth: []
+  /encryptionKey/delete/{id}:
+    post:
+      tags:
+      - EncryptionKey
+      summary: Delete EncryptionKey
+      operationId: deleteEncryptionKey
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the EncryptionKey"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /encryptionKey/list:
+    get:
+      tags:
+      - EncryptionKey
+      summary: List EncryptionKey
+      operationId: listEncryptionKey
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncryptionKeyListResponse"
+      security:
+      - APIKeyAuth: []
+  /encryptionKey/save:
+    post:
+      tags:
+      - EncryptionKey
+      summary: Save EncryptionKey
+      operationId: saveEncryptionKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EncryptionKey"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/EncryptionKey"
+      security:
+      - APIKeyAuth: []
+  /encryptionKey/update/{id}:
+    post:
+      tags:
+      - EncryptionKey
+      summary: Update EncryptionKey
+      operationId: updateEncryptionKey
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the EncryptionKey"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EncryptionKey"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/EncryptionKey"
+      security:
+      - APIKeyAuth: []
+  /evt/list:
+    get:
+      tags:
+      - Evt
+      summary: List Evt
+      operationId: getAllEvt
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: evtCodeRestriction.evtCodes
+        in: query
+        description: EvtCodeRestriction EvtCode value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/EvtCode"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvtListResponse"
+      security:
+      - APIKeyAuth: []
+  /evt/show/{id}:
+    get:
+      tags:
+      - Evt
+      summary: Show Evt
+      operationId: showEvt
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Evt"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Evt"
+      security:
+      - APIKeyAuth: []
+  /hol/delete/{id}:
+    post:
+      tags:
+      - Hol
+      summary: Delete Hol
+      operationId: deleteHol
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Hol"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /hol/list:
+    get:
+      tags:
+      - Hol
+      summary: List Hol
+      operationId: listHol
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolListResponse"
+      security:
+      - APIKeyAuth: []
+  /hol/save:
+    post:
+      tags:
+      - Hol
+      summary: Save Hol
+      operationId: saveHol
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Hol"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Hol"
+      security:
+      - APIKeyAuth: []
+  /hol/update/{id}:
+    post:
+      tags:
+      - Hol
+      summary: Update Hol
+      operationId: updateHol
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Hol"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Hol"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Hol"
+      security:
+      - APIKeyAuth: []
+  /holCal/delete/{id}:
+    post:
+      tags:
+      - HolCal
+      summary: Delete HolCal
+      operationId: deleteHolCal
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolCal"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /holCal/list:
+    get:
+      tags:
+      - HolCal
+      summary: List HolCal
+      operationId: listHolCal
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolCalListResponse"
+      security:
+      - APIKeyAuth: []
+  /holCal/save:
+    post:
+      tags:
+      - HolCal
+      summary: Save HolCal
+      operationId: saveHolCal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolCal"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolCal"
+      security:
+      - APIKeyAuth: []
+  /holCal/update/{id}:
+    post:
+      tags:
+      - HolCal
+      summary: Update HolCal
+      operationId: updateHolCal
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolCal"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolCal"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolCal"
+      security:
+      - APIKeyAuth: []
+  /holType/delete/{id}:
+    post:
+      tags:
+      - HolType
+      summary: Delete HolType
+      operationId: deleteHolType
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolType"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /holType/list:
+    get:
+      tags:
+      - HolType
+      summary: List HolType
+      operationId: listHolType
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HolTypeListResponse"
+      security:
+      - APIKeyAuth: []
+  /holType/save:
+    post:
+      tags:
+      - HolType
+      summary: Save HolType
+      operationId: saveHolType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolType"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolType"
+      security:
+      - APIKeyAuth: []
+  /holType/update/{id}:
+    post:
+      tags:
+      - HolType
+      summary: Update HolType
+      operationId: updateHolType
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolType"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HolType"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolType"
+      security:
+      - APIKeyAuth: []
+  /json/doorModeChange:
+    get:
+      tags:
+      - DevAction
+      summary: "Door: mode change"
+      operationId: doorModeChange
+      parameters:
+      - name: unid
+        in: query
+        description: Device unique ID
+        required: false
+        schema:
+          type: integer
+      - name: uuid
+        in: query
+        description: Device UUID
+        required: false
+        schema:
+          type: string
+      - name: tag
+        in: query
+        description: Device tag
+        required: false
+        schema:
+          type: string
+      - name: value
+        in: query
+        description: "Door mode type, or \"RESET\""
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /json/doorMomentaryUnlock:
+    get:
+      tags:
+      - DevAction
+      summary: "Controller: resync"
+      operationId: doorMomentaryUnlock
+      parameters:
+      - name: unid
+        in: query
+        description: Device unique ID
+        required: false
+        schema:
+          type: integer
+      - name: uuid
+        in: query
+        description: Device UUID
+        required: false
+        schema:
+          type: string
+      - name: tag
+        in: query
+        description: Device tag
+        required: false
+        schema:
+          type: string
+      - name: extDoorTime
+        in: query
+        description: Use extended door times
+        required: false
+        schema:
+          type: boolean
+      - name: strikeTime
+        in: query
+        description: Strike time
+        required: false
+        schema:
+          type: integer
+      - name: heldTime
+        in: query
+        description: Held time
+        required: false
+        schema:
+          type: integer
+      - name: heldPreAlarmWarnTime
+        in: query
+        description: Held pre-alarm warning time
+        required: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /nodeDev/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete NodeDev
+      operationId: deleteNodeDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /nodeDev/list:
+    get:
+      tags:
+      - Dev
+      summary: List NodeDev
+      operationId: listNodeDev
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /nodeDev/save:
+    post:
+      tags:
+      - Dev
+      summary: Save NodeDev
+      operationId: saveNodeDev
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /nodeDev/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update NodeDev
+      operationId: updateNodeDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /sched/delete/{id}:
+    post:
+      tags:
+      - Sched
+      summary: Delete Sched
+      operationId: deleteSched
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Sched"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /sched/list:
+    get:
+      tags:
+      - Sched
+      summary: List Sched
+      operationId: listSched
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SchedListResponse"
+      security:
+      - APIKeyAuth: []
+  /sched/save:
+    post:
+      tags:
+      - Sched
+      summary: Save Sched
+      operationId: saveSched
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Sched"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Sched"
+      security:
+      - APIKeyAuth: []
+  /sched/update/{id}:
+    post:
+      tags:
+      - Sched
+      summary: Update Sched
+      operationId: updateSched
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Sched"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Sched"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Sched"
+      security:
+      - APIKeyAuth: []
+  /sensor/delete/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Delete Sensor
+      operationId: deleteSensor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+  /sensor/list:
+    get:
+      tags:
+      - Dev
+      summary: List Sensor
+      operationId: listSensor
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevListResponse"
+      security:
+      - APIKeyAuth: []
+  /sensor/save:
+    post:
+      tags:
+      - Dev
+      summary: Save Sensor
+      operationId: saveSensor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /sensor/update/{id}:
+    post:
+      tags:
+      - Dev
+      summary: Update Sensor
+      operationId: updateSensor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      - name: upsert
+        in: query
+        description: "defaults to false.  If true, upsert is performed (if the referenced\
+          \ object does not exist).  Only valid by UUID."
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dev"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /terminate:
+    get:
+      tags:
+      - Authentication
+      summary: Terminate the current session
+      operationId: terminate
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Void"
+      security:
+      - APIKeyAuth: []
+
+
+  /credHolder/import:
+    post:
+      summary: Import CredHolder (credential holder) CSV file
+      tags:
+        - CredHolder
+      operationId: importCredHolder
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                # 'file' will be the field name in this multipart request
+                file:
+                  type: string
+                  format: binary
+      security:
+        - APIKeyAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instanceCount:
+                    type: integer
+components:
+  securitySchemes:
+    APIKeyAuth:
+      type: apiKey
+      name: sessionToken
+      in: header
+  schemas:
+    Void:
+      type: object
+    AuthenticateRequest:
+      type: object
+      additionalProperties: true
+      description: Request body for - /authenticate
+      properties:
+        username:
+          type: string
+          description: username
+        password:
+          type: string
+          description: password
+        apiClientType:
+          $ref: '#/components/schemas/ApiClientType'
+          # API client type
+    AuthenticateResult:
+      type: object
+      additionalProperties: true
+      description: Information returned from an /authenticate call, including whether authentication was successful or not, and the session token if successful.
+      properties:
+        authenticated:
+          type: boolean
+          description: true if authentication succeeded, false otherwise.
+        sessionToken:
+          type: string
+          description: The session token to be used in subsequent API calls
+        evtDevRef:
+          $ref: '#/components/schemas/EvtDevRef'
+          # A reference to the device which represents the server being logged into.
+        softwareVersion:
+          type: string
+          description: Software version.
+        softwareVersionTimestamp:
+          type: string
+          description: Build timestamp of the software version.
+        timeZone:
+          type: string
+          description: Time zone of the server/panel logged into.
+        apiVersion:
+          type: string
+          description: API version - major version number changes potentially break backwards compatibility, minor version changes do not.
+    DevCreationTemplateParams:
+      type: object
+      additionalProperties: true
+      description: Some of the data properties from a Dev used for parameterized Dev creation.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        type:
+          $ref: '#/components/schemas/DevCreationTemplateType'
+          # Device creation template type.
+        name:
+          type: string
+          description: Device name.
+        address:
+          type: string
+          description: Device address.
+        logicalAddress:
+          type: integer
+          format: int32
+          description: Logical address, if different from physical address.
+        macAddress:
+          type: string
+          description: MAC address, if applicable
+        serialNum:
+          type: string
+          description: Device serial number
+        enabled:
+          type: boolean
+          description: Device enabled/disabled.
+        port:
+          type: integer
+          format: int32
+          description: Device port.
+        speed:
+          type: integer
+          format: int32
+          description: Device speed.
+        devType:
+          $ref: '#/components/schemas/DevType'
+          # Device type.
+        devSubType:
+          $ref: '#/components/schemas/DevSubType'
+          # Device sub-type.
+        devMod:
+          $ref: '#/components/schemas/DevMod'
+          # Device model.
+        devPlatform:
+          $ref: '#/components/schemas/DevPlatform'
+          # Device platform.
+        devUse:
+          $ref: '#/components/schemas/DevUse'
+          # Device use.
+        physicalParent:
+          $ref: '#/components/schemas/EvtDevRef'
+          # If this is set, this will be the physical parent of the top device in the subtree created.  Otherwise, the root NodeDev will be used.
+        logicalParent:
+          $ref: '#/components/schemas/EvtDevRef'
+          # Logical parent (reference).
+        username:
+          type: string
+          description: username.
+        password:
+          type: string
+          description: password.
+        devInitiatesConnection:
+          type: boolean
+          description: true if the device initiates the connection.
+        quantity:
+          type: integer
+          format: int32
+          description: For template types which can generate more than one device.  Note that these templates are generally expected to auto-assign names and addresses, rather than use the ones on this object.
+        quantityDoor:
+          type: integer
+          format: int32
+          description: For template types which can generate varying number of Door objects in their subtree - the quantity of doors.
+        doorNames:
+          type: array
+          items:
+            type: string
+          description: If quantityDoor is not null, or the template creates multiple doors by default, or if quantity is used to represent a number of doors, then this list of names can be used to override the default names of the multiple doors created.
+        port2:
+          type: integer
+          format: int32
+          description: Device port (secondary).
+        serialPortAddress2:
+          type: string
+          description: Serial port address (secondary).  Only used if the secondary device is a CredReader.
+    DevSaveFromTemplateResult:
+      type: object
+      additionalProperties: true
+      description: Result of from /dev/saveFromTemplate call, including the primary Dev created, and references to other objects inserted, deleted, and/or updated.
+      properties:
+        instance:
+          $ref: '#/components/schemas/Dev'
+          # Device instance created.
+        instanceList_Insert:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: References to inserted objects.
+        instanceList_Update:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: References to updated objects.
+        instanceList_Delete:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: References to deleted objects.
+    EvtListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /evt/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evt'
+          description: List of events matching the request, subject to the pagination parameters
+    ObjRef:
+      type: object
+      additionalProperties: true
+      description: Reference to another object, including type, with all possible identity properties, as well as name.
+      properties:
+        type:
+          type: string
+          description: Type string for the type of object being referenced.
+        name:
+          type: string
+          description: From referenced object - name.
+        unid:
+          type: integer
+          format: int32
+          description: From referenced object - unid.
+        uuid:
+          type: string
+          description: From referenced object - uuid.
+        externalId:
+          type: string
+          description: From referenced object - externalId.
+    CredListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /cred/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cred'
+          description: The list of objects matching the request, subject to pagination parameters.
+    CredTemplateListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /credTemplate/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredTemplate'
+          description: The list of objects matching the request, subject to pagination parameters.
+    DataFormatListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /dataFormat/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFormat'
+          description: The list of objects matching the request, subject to pagination parameters.
+    DataLayoutListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /dataLayout/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataLayout'
+          description: The list of objects matching the request, subject to pagination parameters.
+    DevListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /dev/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dev'
+          description: The list of objects matching the request, subject to pagination parameters.
+    EncryptionKeyListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /encryptionKey/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncryptionKey'
+          description: The list of objects matching the request, subject to pagination parameters.
+    EncryptionKeyRefListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /encryptionKeyRef/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/EncryptionKeyRef'
+          description: The list of objects matching the request, subject to pagination parameters.
+    HolCalListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /holCal/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/HolCal'
+          description: The list of objects matching the request, subject to pagination parameters.
+    HolListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /hol/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hol'
+          description: The list of objects matching the request, subject to pagination parameters.
+    HolTypeListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /holType/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/HolType'
+          description: The list of objects matching the request, subject to pagination parameters.
+    PrivListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /priv/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Priv'
+          description: The list of objects matching the request, subject to pagination parameters.
+    SchedListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /sched/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sched'
+          description: The list of objects matching the request, subject to pagination parameters.
+    CardPin:
+      type: object
+      additionalProperties: true
+      description: A card and/or PIN.
+      properties:
+        credNum:
+          type: string
+          description: big integer, represented as a string
+        facilityCode:
+          type: integer
+          format: int32
+          description: Facility code (AKA site code, building code). Normally, facility code is specified on the CredTemplate (CardPinTemplate).  But in cases where the facility code is not part of the template, it can be specified here.
+        pin:
+          type: string
+          description: PIN (Personal Identification Number).
+        pinUnique:
+          type: boolean
+          description: Whether the PIN is unique.  This is more often set to true than not, to allow PIN-only access.
+    CardPinTemplate:
+      type: object
+      additionalProperties: true
+      description: A template for Card/PIN (CardPin)
+      properties:
+        credComponentPresence:
+          $ref: '#/components/schemas/CredComponentPresence'
+          # Presence of card/PIN
+        credNumPresence:
+          $ref: '#/components/schemas/CredComponentPresence'
+          # Presence of credNum.
+        pinPresence:
+          $ref: '#/components/schemas/CredComponentPresence'
+          # Presence of PIN.
+        pinUnique:
+          type: boolean
+          description: null if optional, true if required to be unique in Cred, false if required to be set as not unique in Cred.
+        minPinLength:
+          type: integer
+          format: int32
+          description: Minimum PIN length.
+        maxPinLength:
+          type: integer
+          format: int32
+          description: Maximum PIN length.
+        facilityCode:
+          type: integer
+          format: int32
+          description: Facility code (AKA site code, building code).
+        dataLayout:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - CardPinTemplate - Data layout.
+        anyDataLayout:
+          type: boolean
+          description: If true, then any DataLayout is supported.  This allows modeling of systems which do not link credentials to formats.  If this option is used with drivers for hardware that do require this link, then the first available DataLayout is to be used.
+    Cred:
+      type: object
+      additionalProperties: true
+      description: A credential - for door access and/or application access.  May include various factors such as card number/PIN, biometric data, username/password.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        name:
+          type: string
+          description: Name as a single string.
+        enabled:
+          type: boolean
+          description: Whether this credential is enabled (active), or not.
+        effective:
+          type: string
+          format: date-time
+          description: Effective date - credential inactive before this date.
+        expires:
+          type: string
+          format: date-time
+          description: Expiration date - credential inactive after this date.
+        credTemplate:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - Cred - Credential template.
+        cardPin:
+          $ref: '#/components/schemas/CardPin'
+          # Card/PIN.
+        doorAccessModifiers:
+          $ref: '#/components/schemas/DoorAccessModifiers'
+          # Door access modifiers.
+        privBindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredPrivBinding'
+          description: Privilege bindings.
+    CredTemplate:
+      type: object
+      additionalProperties: true
+      description: Template for a Cred.  Includes the fundamental type of the Cred such as whether it is a user/pass, card/pin, pin only, uses biometrics (and what type), and for a card, the facility code and data format.  This template is used by association, not by copying data.  Not used as a template for privileges or other data.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        cardPinTemplate:
+          $ref: '#/components/schemas/CardPinTemplate'
+          # Card/PIN template.
+    DataFormat:
+      type: object
+      additionalProperties: true
+      description: Base class for card data format definitions, including ANSI/ISO BCD (Magstripe), Binary (Wiegand).
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        dataFormatType:
+          $ref: '#/components/schemas/DataFormatType'
+          # Data format type, determines subclass.
+      discriminator:
+        propertyName: dataFormatType
+        mapping:
+          '1': '#/components/schemas/BinaryFormat'
+    BinaryElement:
+      type: object
+      additionalProperties: true
+      description: Element of a BinaryFormat.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        num:
+          type: integer
+          format: int32
+          description: Ordering for the purposes of processing. Not necessarily the same as the physical order on the card/credential.
+        type:
+          $ref: '#/components/schemas/BinaryElementType'
+          # Type, determines subclass.
+        start:
+          type: integer
+          format: int32
+          description: Starting bit, 0-based.
+        len:
+          type: integer
+          format: int32
+          description: Length in bits.
+      discriminator:
+        propertyName: type
+        mapping:
+          '0': '#/components/schemas/StaticBinaryElement'
+          '1': '#/components/schemas/ParityBinaryElement'
+          '2': '#/components/schemas/FieldBinaryElement'
+    BinaryFormat:
+      allOf:
+        - $ref: '#/components/schemas/DataFormat'
+        - type: object
+          description: Binary DataFormat, used for Prox/Wiegand card formats.  It contains an element for each field, parity bit, etc. - only applicable if dataFormatType=1 (DataFormatType_BINARY)
+          properties:
+            maxBits:
+              type: integer
+              format: int32
+              description: Maximum number of bits. Generally the same as minBits.
+            elements:
+              type: array
+              items:
+                $ref: '#/components/schemas/BinaryElement'
+              description: Elements.
+    FieldBinaryElement:
+      allOf:
+        - $ref: '#/components/schemas/BinaryElement'
+        - type: object
+          description: Data field BinaryElement. - only applicable if type=2 (BinaryElementType_FIELD)
+          properties:
+            field:
+              $ref: '#/components/schemas/DataFormatField'
+              # Which field.
+            staticValue:
+              type: string
+              description: big integer, represented as a string
+    ParityBinaryElement:
+      allOf:
+        - $ref: '#/components/schemas/BinaryElement'
+        - type: object
+          description: Parity BinaryElement. - only applicable if type=1 (BinaryElementType_PARITY)
+          properties:
+            odd:
+              type: boolean
+              description: true if odd parity, false if even parity.
+            srcStart:
+              type: integer
+              format: int32
+              description: Starting bit for the source of the parity, zero-based.  srcStart/srcLen does NOT include the parity bit itself.
+            srcLen:
+              type: integer
+              format: int32
+              description: Length of the source of the parity. srcStart/srcLen does NOT include the parity bit itself.
+            mask:
+              type: string
+              description: If null, then all bits included in parity calculation.  If not null, then this is a String of '0' and '1' ASCII characters representing the mask.  The mask must be the same length as srcLen.  It should not have 0s/1s for the other bits on the card.
+    StaticBinaryElement:
+      allOf:
+        - $ref: '#/components/schemas/BinaryElement'
+        - type: object
+          description: Static (fixed) BinaryElement. - only applicable if type=0 (BinaryElementType_STATIC)
+          properties:
+            value:
+              type: string
+              description: big integer, represented as a string
+    DataLayout:
+      type: object
+      additionalProperties: true
+      description: Data layout of DataFormat on a Cred.  This is most meaningful for smart cards (SmartDataLayout), which can have multiple files/sectors/blocks of data, protected by keys.  ANSI/ISO ABA Track II Magnetic stripe and non-smart-card proximity/RFID cards (binary/Wiegand) use the subclass BasicDataLayout, which simply has a single DataFormat, corresponding to all the data on the card.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        layoutType:
+          $ref: '#/components/schemas/DataLayoutType'
+          # Type (subclass) of DataLayout.
+        enabled:
+          type: boolean
+          description: Whether the DataLayout is active (enabled) or not.  if null, this should be interpreted as true (enabled).
+      discriminator:
+        propertyName: layoutType
+        mapping:
+          '0': '#/components/schemas/BasicDataLayout'
+    BasicDataLayout:
+      allOf:
+        - $ref: '#/components/schemas/DataLayout'
+        - type: object
+          description: The simplest form of a DataLayout which has only a single DataFormat.  There is no need to specify the location of this data, as there is only one.  So for ABA Track II magnetic strip cards, or non-smart proximity/RFID cards, this simply corresponds to all the encoded data on the card in one chunk. - only applicable if layoutType=0 (DataLayoutType_BASIC)
+          properties:
+            dataFormat:
+              $ref: '#/components/schemas/ObjRef'
+              # Reference to (and 'type' equals) - BasicDataLayout - The DataFormat for this BasicDataLayout.
+    EncryptionKey:
+      type: object
+      additionalProperties: true
+      description: The collection of EncryptionKey serves as a db-based keystore.  Note that this is only one possible way of storing the encryption keys referenced by EncryptionKeyRef.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        tag:
+          type: string
+          description: tag.
+        uuid:
+          type: string
+          description: UUID.
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        algorithm:
+          type: string
+          description: Algorithm name (Java security naming), e.g. "RSA".
+        size:
+          type: integer
+          format: int32
+          description: Size in bits.
+        keyIdentifier:
+          type: string
+          description: Identifier to be looked up by.  May be defined in KeyIds, or may be a custom value.
+        bytes:
+          type: string
+          format: byte
+          description: The binary bytes of the key.
+    EncryptionKeyRef:
+      type: object
+      additionalProperties: true
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        tag:
+          type: string
+          description: tag
+        uuid:
+          type: string
+          description: UUID
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        algorithm:
+          type: string
+          description: Algorithm name (Java security naming), e.g. "RSA".
+        size:
+          type: integer
+          format: int32
+          description: Size in bits.
+        keystoreIdentifier:
+          type: string
+          description: Identifier to indentify the key store in which this key is stored.  May be defined in {@link KeystoreIds}, or may be a custom value.
+        keyIdentifier:
+          type: string
+          description: Identifier to look up key in a key store.  May be defined in {@link KeyIds}, or may be a custom value.
+        encryptWithType:
+          $ref: '#/components/schemas/EncryptionKeyType'
+          # Which type (public, private, secret) to encrypt with.  For asymmetric encryption, this should generally be PRIVATE.
+    CredPrivBinding:
+      type: object
+      additionalProperties: true
+      description: A binding to a Priv, for a Cred.
+      properties:
+        schedRestriction:
+          $ref: '#/components/schemas/SchedRestriction'
+          # Schedule restriction
+        devAsDoorAccessPriv:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - CredPrivBinding - In lieu of a DoorAccessPriv, this allows a Dev to be treated as a DoorAccessPriv.  In combination with other restrictions, this can be used for "precision access".  For Door access, the Dev can be either a Door or a DevGroup.  This is ignored when processing other Priv subclasses.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+    DoorAccessModifiers:
+      type: object
+      additionalProperties: true
+      description: Modifiers to a Cred, CredHolder, or a PrivBinding for Door access.
+      properties:
+        extDoorTime:
+          type: boolean
+          description: If true, use the extended door strike and door held times.  Also known as "ADA" mode or accessibility mode.
+    DoorAccessPriv:
+      allOf:
+        - $ref: '#/components/schemas/Priv'
+        - type: object
+          description: Door access Priv. - only applicable if privType=0 (PrivType_DOOR)
+          properties:
+            elements:
+              type: array
+              items:
+                $ref: '#/components/schemas/DoorAccessPrivElement'
+              description: Elements.
+    DoorAccessPrivElement:
+      type: object
+      additionalProperties: true
+      description: Element of a DoorAccessPriv.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        door:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - DoorAccessPrivElement - Door.  If null, and devGroup and controlledArea are null, then all Door.
+        schedRestriction:
+          $ref: '#/components/schemas/SchedRestriction'
+          # Schedule restriction.
+    Priv:
+      type: object
+      additionalProperties: true
+      description: Base class for privileges.  Subclasses include privileges for door access, application access, keypad commands, and roles.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        externalId:
+          type: string
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        enabled:
+          type: boolean
+          description: Whether this privilege is enabled or not.
+        privType:
+          $ref: '#/components/schemas/PrivType'
+          # Privilege type.
+      discriminator:
+        propertyName: privType
+        mapping:
+          '0': '#/components/schemas/DoorAccessPriv'
+    Dev:
+      type: object
+      additionalProperties: true
+      description: Base class for a device - a hardware (or in some cases software, or virtual) component within the system, arranged in a physical and logical hierarchy.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        externalId:
+          type: string
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        address:
+          type: string
+          description: The hardware/network address of this device.
+        logicalAddress:
+          type: integer
+          format: int32
+          description: Logical address, if different from physical address.
+        macAddress:
+          type: string
+          description: MAC address (if applicable).
+        enabled:
+          type: boolean
+          description: true if the device is enabled, false if disabled.
+        port:
+          type: integer
+          format: int32
+          description: Port number.  For network-connected devices, this is generally a TCP port.  For serially-connected devices, this is often a polling address.
+        speed:
+          type: integer
+          format: int32
+          description: Connection speed.  Generally for serially-connected devices.
+        devType:
+          $ref: '#/components/schemas/DevType'
+          # Device type.
+        devSubType:
+          $ref: '#/components/schemas/DevSubType'
+          # Device sub-type.
+        devMod:
+          $ref: '#/components/schemas/DevMod'
+          # Device model.
+        commFamily:
+          $ref: '#/components/schemas/CommFamily'
+          # Communications family - network, serial, etc.
+        devPlatform:
+          $ref: '#/components/schemas/DevPlatform'
+          # Device platform.
+        devModConfig:
+          $ref: '#/components/schemas/DevModConfig'
+          # Device-model-specific configuration.
+        devUse:
+          $ref: '#/components/schemas/DevUse'
+          # The use/function/role of the device, typically with respect to the logical parent.
+        physicalParent:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - Dev - or subclass - Physical parent device.
+        logicalParent:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - Dev - or subclass - Logical parent device.
+        timeZone:
+          type: string
+          description: Time zone the device is in.
+        ignoreDaylightSavings:
+          type: boolean
+          description: Whether to ignore daylight savings.
+        logicalChildren:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: Reference to (and 'type' equals) - Dev - or subclass - Logical children devices.
+        physicalChildren:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: Reference to (and 'type' equals) - Dev - or subclass - Physical children devices.
+      discriminator:
+        propertyName: devType
+        mapping:
+          '0': '#/components/schemas/NodeDev'
+          '1': '#/components/schemas/Controller'
+          '2': '#/components/schemas/Sensor'
+          '3': '#/components/schemas/Actuator'
+          '4': '#/components/schemas/CredReader'
+          '5': '#/components/schemas/Door'
+    DevModConfig:
+      type: object
+      additionalProperties: true
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        type:
+          $ref: '#/components/schemas/DevModConfigType'
+      discriminator:
+        propertyName: type
+        mapping:
+    DevModRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by DevMod.
+      properties:
+        devMods:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevMod'
+          description: Specific device models to restrict to.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    DevSubTypeRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by DevSubType.
+      properties:
+        devSubTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevSubType'
+          description: Restrict to the given DevSubType values.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    DevTypeRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by DevType.
+      properties:
+        devTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevType'
+          description: Restrict to the given DevType values.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    DevUseRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by DevUse.
+      properties:
+        devUses:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevUse'
+          description: Restrict to the given DevUse values.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    EnabledRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by enabled/disabled.
+      properties:
+        enabledValue:
+          type: boolean
+          description: Restrict to this Boolean value.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    GeneralDevRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by specific Dev(s) or attributes thereof.
+      properties:
+        devModRestriction:
+          $ref: '#/components/schemas/DevModRestriction'
+          # Restriction by device model.
+        devSubTypeRestriction:
+          $ref: '#/components/schemas/DevSubTypeRestriction'
+          # Restriction by device sub-type.
+        devTypeRestriction:
+          $ref: '#/components/schemas/DevTypeRestriction'
+          # Restriction by device type.
+        devUseRestriction:
+          $ref: '#/components/schemas/DevUseRestriction'
+          # Restriction by device use.
+        enabledRestriction:
+          $ref: '#/components/schemas/EnabledRestriction'
+          # Restriction by enabled/disabled.
+    SpecificDevRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by specific Dev(s).
+      properties:
+        devs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: Reference to (and 'type' equals) - Dev - or subclass - Restrict to these specific devices.
+        invert:
+          type: boolean
+          description: If true, invert the restriction.
+    DevActionParams:
+      type: object
+      additionalProperties: true
+      description: Parameters for a device action.  Subclassed for specific DevActionType types which require specific parameters.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        type:
+          $ref: '#/components/schemas/DevActionParamsType'
+          # The type of action the parameters are for.
+      discriminator:
+        propertyName: type
+        mapping:
+          '1': '#/components/schemas/DoorModeDevActionParams'
+          '10': '#/components/schemas/DoorMomentaryUnlockDevActionParams'
+    DoorModeDevActionParams:
+      allOf:
+        - $ref: '#/components/schemas/DevActionParams'
+        - type: object
+          description: only applicable if type=1 (DevActionParamsType_DOOR_MODE)
+          properties:
+            resetToDefault:
+              type: boolean
+            doorMode:
+              $ref: '#/components/schemas/DoorMode'
+    DoorMomentaryUnlockDevActionParams:
+      allOf:
+        - $ref: '#/components/schemas/DevActionParams'
+        - type: object
+          description: DevActionParams for door momentary unlock action (DevActionType.DOOR_MOMENTARY_UNLOCK). - only applicable if type=10 (DevActionParamsType_DOOR_MOMENTARY_UNLOCK)
+          properties:
+    Actuator:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: An actuator, or output. - only applicable if devType=3 (DevType_ACTUATOR)
+          properties:
+            actuatorConfig:
+              $ref: '#/components/schemas/ActuatorConfig'
+              # Actuator configuration.
+    ActuatorConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for an Actuator.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - ActuatorConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - ActuatorConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+    Controller:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: A controller - or I/O board.  This can be either an "intelligent" controller which makes access control decisions, or a "sub" controller which only performs I/O, leaving it to an upstream intelligent controller or driver to make the decisions. - only applicable if devType=1 (DevType_IO_CONTROLLER)
+          properties:
+            controllerConfig:
+              $ref: '#/components/schemas/ControllerConfig'
+              # Controller configuration.
+    ControllerConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for a Controller.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - ControllerConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - ControllerConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+    CredReader:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: Credential (card) reader. - only applicable if devType=4 (DevType_CRED_READER)
+          properties:
+            credReaderConfig:
+              $ref: '#/components/schemas/CredReaderConfig'
+              # Credential reader configuration.
+    CredReaderConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for a CredReader
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - CredReaderConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - CredReaderConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        commType:
+          $ref: '#/components/schemas/CredReaderCommType'
+          # The communications type of this reader.
+        tamperType:
+          $ref: '#/components/schemas/CredReaderTamperType'
+          # The tamper type of this reader.
+        ledType:
+          $ref: '#/components/schemas/CredReaderLedType'
+          # LED type for this reader.
+        serialPortAddress:
+          type: string
+          description: Serial port address for this reader.  If set, this is used as the serial port address instead of Dev.address.  May be a literal serial port address like /dev/ttyUSB0, COM1, etc, or, an ordinal such as 0 or 1.
+    Door:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: A door, AKA access point.  May be any sort of access-controlled portal, from a door, to a storage locker, to a turnstile, to a parking gate. - only applicable if devType=5 (DevType_DOOR)
+          properties:
+            doorConfig:
+              $ref: '#/components/schemas/DoorConfig'
+              # Door configuration
+    DoorMode:
+      type: object
+      additionalProperties: true
+      description: A door mode.  Can specify whether access is allowed by unique PIN, as well as with card, and whether a confirming PIN is required when using a card.
+      properties:
+        staticState:
+          $ref: '#/components/schemas/DoorModeStaticState'
+          # Whether the door is fully locked, fully unlocked, or access-controlled.
+        allowUniquePin:
+          type: boolean
+          description: Whether to allow access by unique PIN in CardPin. If null, use system default.
+        allowCard:
+          type: boolean
+          description: Whether to allow access by card. If null, use system default.
+        requireConfirmingPinWithCard:
+          type: boolean
+          description: Whether to require confirming PIN for access by card. If null, use system default.
+    NodeDev:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: A device corresponding to a Node. - only applicable if devType=0 (DevType_NODE_DEV)
+          properties:
+            nodeDevConfig:
+              $ref: '#/components/schemas/NodeDevConfig'
+              # Node device configuration.
+    NodeDevConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for a NodeDev.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - NodeDevConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - NodeDevConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+    Sensor:
+      allOf:
+        - $ref: '#/components/schemas/Dev'
+        - type: object
+          description: A sensor, or input.  May be digital, analog (often used for supervised inputs), or other such as environmental (temperature/humidity), etc. - only applicable if devType=2 (DevType_SENSOR)
+          properties:
+            sensorConfig:
+              $ref: '#/components/schemas/SensorConfig'
+              # Sensor capabilities.
+    SensorConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for a Sensor.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - SensorConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - SensorConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        invert:
+          type: boolean
+          description: Whether to invert the logic of the sensor.  This generally means normally closed for false, normally open for true.
+    Evt:
+      type: object
+      additionalProperties: true
+      description: An event.  An event is designed to contain all relevant data captured at the time of the event, to minimize the need to cross-reference with other data, and to include all information needed for reporting, filtering, viewing embedded within the event.
+      properties:
+        unid:
+          type: integer
+          format: int64
+          description: Unique ID.
+        hwTime:
+          type: string
+          format: date-time
+          description: Time occurred at hardware.
+        dbTime:
+          type: string
+          format: date-time
+          description: Time recorded in DB.
+        hwTimeZone:
+          type: string
+          description: The local time zone, for display purposes only, for displaying hwTime/hwTimeMillis.
+        evtCode:
+          $ref: '#/components/schemas/EvtCode'
+          # Event code, "what" happened.
+        externalEvtCodeText:
+          type: string
+          description: If evtCode is EvtCode.EXTERNAL, the text string for the external event code.
+        externalEvtCodeId:
+          type: string
+          description: If evtCode is EvtCode.EXTERNAL, the external system's id for the external event code.
+        evtSubCode:
+          $ref: '#/components/schemas/EvtSubCode'
+          # Event sub-code - more detail on "what" happened.
+        externalSubCodeText:
+          type: string
+          description: If evtSubCode is EvtSubCode.EXTERNAL, the text string for the external event sub-code.
+        externalSubCodeId:
+          type: string
+          description: If evtSubCode is EvtSubCode.EXTERNAL, the external system's id for the external event sub code.
+        evtModifiers:
+          $ref: '#/components/schemas/EvtModifiers'
+          # Event modifiers.
+        data:
+          type: string
+          description: Extra/arbitrary data associated with the event.
+        evtDevRef:
+          $ref: '#/components/schemas/EvtDevRef'
+          # A reference to the device associated with this event.
+        evtControllerRef:
+          $ref: '#/components/schemas/EvtDevRef'
+          # A reference to the controller device associated with this event.
+        evtCredRef:
+          $ref: '#/components/schemas/EvtCredRef'
+          # A reference to the credential associated with this event.
+        evtSchedRef:
+          $ref: '#/components/schemas/EvtSchedRef'
+          # A reference to the schedule associated with this event.
+        consumed:
+          type: boolean
+          description: Whether this event has been consumed or not.  This is a kind of "soft" delete (if consumed=true).
+        uuid:
+          type: string
+          description: UUID.
+    EvtCodeRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by EvtCode.
+      properties:
+        evtCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvtCode'
+          description: The EvtCode values to restrict to.
+        invert:
+          type: boolean
+          description: If true, invert the set of EvtCode specified in evtCodes.
+        emptyIsNone:
+          type: boolean
+          description: If true (or null), empty is treated as no restriction.  If false, empty is treated as restricting all values.
+    EvtCredRef:
+      type: object
+      additionalProperties: true
+      description: A reference (really a summary) from an Evt to a Cred, containing its essential properties, and without requiring any lookup of the referenced object for reporting, filtering, or display.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: From referenced Cred - unid
+        credTemplateRef:
+          $ref: '#/components/schemas/EvtCredTemplateRef'
+          # From referenced Cred - CredTemplate (reference)
+        name:
+          type: string
+          description: From referenced Cred - name
+        credNum:
+          type: string
+          description: big integer, represented as a string
+        facilityCode:
+          type: integer
+          format: int32
+          description: From referenced Cred - facilityCode
+        uuid:
+          type: string
+          description: From referenced Cred - uuid
+    EvtCredTemplateRef:
+      type: object
+      additionalProperties: true
+      description: A reference (really a summary) from an Evt to a CredTemplate, containing its essential properties, and without requiring any lookup of the referenced object for reporting, filtering, or display.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: From referenced CredTemplate - unid
+        name:
+          type: string
+          description: From referenced CredTemplate - name
+        uuid:
+          type: string
+          description: From referenced CredTemplate - uuid
+    EvtDevRef:
+      type: object
+      additionalProperties: true
+      description: A reference (really a summary) from an Evt to a Dev, containing its essential properties, and without requiring any lookup of the referenced object for reporting, filtering, or display.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: From referenced Dev - unid
+        name:
+          type: string
+          description: From referenced Dev - name
+        address:
+          type: string
+          description: From referenced Dev - address
+        logicalAddress:
+          type: integer
+          format: int32
+          description: From referenced Dev - logicalAddress
+        devPlatform:
+          $ref: '#/components/schemas/DevPlatform'
+          # From referenced Dev - devPlatform
+        devType:
+          $ref: '#/components/schemas/DevType'
+          # From referenced Dev - devType
+        externalDevTypeText:
+          type: string
+          description: From referenced Dev - externalDevTypeText
+        externalDevTypeId:
+          type: string
+          description: From referenced Dev - externalDevTypeId
+        devSubType:
+          $ref: '#/components/schemas/DevSubType'
+          # From referenced Dev - devSubType
+        devMod:
+          $ref: '#/components/schemas/DevMod'
+          # From referenced Dev - devMod
+        externalDevModText:
+          type: string
+          description: From referenced Dev - externalDevModText
+        externalDevModId:
+          type: string
+          description: From referenced Dev - externalDevModId
+        devUse:
+          $ref: '#/components/schemas/DevUse'
+          # From referenced Dev - devUse
+        uuid:
+          type: string
+          description: From referenced Dev - uuid
+        externalId:
+          type: string
+          description: From referenced Dev - externalId
+    EvtModifiers:
+      type: object
+      additionalProperties: true
+      description: Evt modifiers
+      properties:
+        inaccurateHwTime:
+          type: boolean
+          description: true if the hwTime is not accurate.  Generally set to be same as dbTime if hwTime not accurate.  Useful when the clock on a controller or door is known to be off or not correctly set.
+        usedCard:
+          type: boolean
+          description: For door access events - true if used - card.
+        usedPin:
+          type: boolean
+          description: For door access events - true if used - PIN.
+    EvtRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction of Evt by EvtCode, Dev, Cred, and other properties.
+      properties:
+        evtCodeRestriction:
+          $ref: '#/components/schemas/EvtCodeRestriction'
+          # Restriction by EvtCode
+        evtSubCodeRestriction:
+          $ref: '#/components/schemas/EvtSubCodeRestriction'
+          # Restriction by EvtSubCode
+        generalDevRestriction:
+          $ref: '#/components/schemas/GeneralDevRestriction'
+          # Restriction by Dev/EvtDevRef
+        generalCredRestriction:
+          $ref: '#/components/schemas/GeneralCredRestriction'
+          # Restriction by Cred/EvtCredRef
+        hwTimeRestriction:
+          $ref: '#/components/schemas/DateTimeRestriction'
+          # Restriction by hwTime
+    EvtSchedRef:
+      type: object
+      additionalProperties: true
+      description: A reference (really a summary) from an Evt to a Sched, containing its essential properties, and without requiring any lookup of the referenced object for reporting, filtering, or display.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: From referenced Sched - unid
+        name:
+          type: string
+          description: From referenced Sched - name
+        uuid:
+          type: string
+          description: From referenced Sched - uuid
+    Hol:
+      type: object
+      additionalProperties: true
+      description: A holiday (element of a HolCal, which is a holiday calendar).  A.K.A "special day".
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        holTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: Reference to (and 'type' equals) - HolType
+        allHolTypes:
+          type: boolean
+        date:
+          type: string
+          format: date
+        numDays:
+          type: integer
+          format: int32
+        repeat:
+          type: boolean
+        numYearsRepeat:
+          type: integer
+          format: int32
+        preserveSchedDay:
+          type: boolean
+        holCal:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - Hol
+    HolCal:
+      type: object
+      additionalProperties: true
+      description: Holiday calendar, consisting of multiple holidays (Hol).
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID
+    HolType:
+      type: object
+      additionalProperties: true
+      description: Holiday type for holidays (Hol).  Schedules (Sched) refer to holidays indirectly via these types.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        externalId:
+          type: string
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+    Sched:
+      type: object
+      additionalProperties: true
+      description: A schedule.  It can have multiple elements (intervals), specifying time ranges, days of the week and holiday types.  Schedules can be used to restrict access during the specified days/times, as well as drive scheduled activity such as door mode changes and other hardware outputs.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        uuid:
+          type: string
+          description: UUID.
+        name:
+          type: string
+          description: Name.
+        externalId:
+          type: string
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchedElement'
+          description: The elements (intervals) within the schedule.
+    SchedElement:
+      type: object
+      additionalProperties: true
+      description: Element of a Sched.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        schedDays:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchedDay'
+          description: Which days the element applies on.
+        holidays:
+          type: boolean
+          description: Whether the element applies on holidays, in general.
+        holTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjRef'
+          description: Reference to (and 'type' equals) - HolType - If holidays is true, and this is an empty list, then all holiday types.  If holidays is true, and this list is not empty, then only the holiday types in the list.
+        start:
+          type: string
+          format: time
+          description: Starting time for the interval.
+        stop:
+          type: string
+          format: time
+          description: Stopping time for the interval.
+    SchedRestriction:
+      type: object
+      additionalProperties: true
+      description: Restriction by Sched.
+      properties:
+        sched:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - SchedRestriction - The schedule to restrict to.  If sched is null, there is no sched restriction, unless invert is true.
+    ApiClientType:
+      type: integer
+      format: int32
+      description: |
+        The type of client connection, when authenticating through an API.
+        0 - WEB_APP - Web application.
+        2 - API - Non-application API purposes, e.g. machine-to-machine interfaces, utilities.
+    BinaryElementType:
+      type: integer
+      format: int32
+      description: |
+        Type (subclass) of BinaryElement.
+        0 - STATIC - Static (fixed) element - StaticBinaryElement.
+        1 - PARITY - Parity - ParityBinaryElement.
+        2 - FIELD - Data field - FieldBinaryElement.
+    CredReaderCommType:
+      type: integer
+      format: int32
+      description: |
+        Possible communications types for a CredReader.
+        6 - OSDP_HALF_DUPLEX - OSDP, half-duplex.  This is "normal" OSDP.
+    CredReaderLedType:
+      type: integer
+      format: int32
+      description: |
+        Possible LED types for a CredReader.
+        2 - OSDP - OSDP - this is more or less implied by CredReaderCommType.OSDP.
+    CredReaderTamperType:
+      type: integer
+      format: int32
+      description: |
+        Possible tamper communication types for a CredReader.
+        2 - OSDP - OSDP - this is more or less implied by CredReaderCommType.OSDP.
+    DataFormatField:
+      type: integer
+      format: int32
+      description: |
+        Fields within a DataFormat.
+        0 - CRED_NUM - Credential number (Card number).
+        1 - FACILITY_CODE - Facility code.
+    DataFormatType:
+      type: integer
+      format: int32
+      description: |
+        Identifies a type (subclass) of DataFormat.
+        1 - BINARY - Binary format, used for Wiegand, etc.
+    DataLayoutType:
+      type: integer
+      format: int32
+      description: |
+        The type of a DataLayout.
+        0 - BASIC - Basic - only has one data format (DataFormat).
+    DevActionParamsType:
+      type: integer
+      format: int32
+      description: |
+        Indicates subclass of DevActionParams.
+        1 - DOOR_MODE - DoorModeDevActionParams, for DevActionType.DOOR_MODE_CHANGE.
+        10 - DOOR_MOMENTARY_UNLOCK - DoorMomentaryUnlockDevActionParams, for DevActionType.DOOR_MOMENTARY_UNLOCK.
+    DevCreationTemplateType:
+      type: integer
+      format: int32
+      description: |
+        Template types for creating new hardware data.
+    DevMod:
+      type: integer
+      format: int32
+      description: |
+        Model for a Dev (device).
+        0 - IO_CONTROLLER_Z9_CUSTOM - IO_CONTROLLER model - z9io - Custom.
+        14 - SENSOR_DIGITAL - SENSOR model - digital.
+        18 - ACTUATOR_DIGITAL - ACTUATOR model - digital.
+        26 - IO_CONTROLLER_Z9_SPCORE - IO_CONTROLLER - Z9-Security SP-Core.
+        46 - IO_CONTROLLER_EXTERNAL - Externally-defined - IO_CONTROLLER.
+        227 - CRED_READER_OSDP - CRED_READER model - OSDP (generic).
+    DevModConfigType:
+      type: integer
+      format: int32
+      description: |
+        Types for subclasses of DevModConfig.
+        13 - CONTROLLER_Z9_SPCORE - SpCoreControllerDevModConfig.
+    DevPlatform:
+      type: integer
+      format: int32
+      description: |
+        Device hardware platform, or family, for a device model (DevMod) for a Dev.
+        0 - Z9_SECURITY - Z9 Security, including z9/op=n and Z9/FL=X.
+        9 - EXTERNAL - External.
+        11 - PKOC - PKOC.
+        19 - PSIA - PSIA.
+    DevSubType:
+      type: integer
+      format: int32
+      description: |
+        Device sub-type.
+        7 - IO_CONTROLLER_SUB - IO_CONTROLLER - sub-controller.
+    DevType:
+      type: integer
+      format: int32
+      description: |
+        Type (subclass) of Dev (device).
+        0 - NODE_DEV - Device representing a node, which is a server or service running the Z9/FL=X software.
+        1 - IO_CONTROLLER - A controller, such as an access control panel.  It may be an intelligent controller, a downstream controller, or a virtual/placeholder controller.
+        2 - SENSOR - Sensor (input), including door contact and REX inputs, AUX inputs, alarm inputs, environmental inputs, others.
+        3 - ACTUATOR - Actuator (output), including relay outputs, AUX outputs, LED outputs, others.
+        4 - CRED_READER - Credential reader.
+        5 - DOOR - Access-control door (access point).
+    DevUse:
+      type: integer
+      format: int32
+      description: |
+        Usage of a Dev.  This describes how the device is used, in other words, its function.
+        0 - ACTUATOR_DOOR_STRIKE - ACTUATOR - door strike. HAS SEMANTICS.
+        2 - ACTUATOR_CRED_READER_LED_RED - ACTUATOR - Cred reader LED - Red. HAS SEMANTICS.
+        3 - ACTUATOR_CRED_READER_LED_GREEN - ACTUATOR - Cred reader LED - Green. HAS SEMANTICS.
+        4 - ACTUATOR_CRED_READER_BEEPER - ACTUATOR - Cred reader beeper. HAS SEMANTICS.
+        10 - SENSOR_DOOR_CONTACT - SENSOR - door contact. HAS SEMANTICS.
+        11 - SENSOR_REX - SENSOR - REX (request to exit). HAS SEMANTICS.
+        12 - SENSOR_TAMPER - SENSOR - Tamper. HAS SEMANTICS.
+        13 - SENSOR_POWER - SENSOR - Power monitor. HAS SEMANTICS.
+        14 - SENSOR_BATTERY - SENSOR - Battery monitor. HAS SEMANTICS.
+        38 - CRED_READER_DOOR - CRED_READER - for a door.  HAS SEMANTICS.
+        39 - DOOR_EXIT - DOOR - exit (as opposed to entry). HAS SEMANTICS.  Logical parent must be a DOOR.
+        44 - IO_CONTROLLER_SECONDARY - IO_CONTROLLER - secondary. HAS SEMANTICS.
+    DoorModeStaticState:
+      type: integer
+      format: int32
+      description: |
+        Values for static state of DoorMode.
+        0 - LOCKED - Always locked, no access.
+        1 - UNLOCKED - Always unlocked.
+        2 - ACCESS_CONTROLLED - Normally locked (secure) but available for access-controlled entry.
+    EncryptionKeyType:
+      type: integer
+      format: int32
+      description: |
+        The type of an encryption key - public, private, secret.
+        0 - PUBLIC - The public key of a public/private key pair.
+        1 - PRIVATE - The private key of a public/private key pair.
+        2 - SECRET - A secret key (symmetric key encryption).
+    EvtCode:
+      type: integer
+      format: int32
+      description: |
+        An event code, indicating what happened.
+        0 - DAEMON_STARTUP - Z9/FL=X startup.
+        6 - LOGIN_GRANTED - Login granted (application access).
+        7 - LOGIN_DENIED - Login denied (application access).
+        8 - LOGOUT - Logout (application access).
+        9 - CONTROLLER_STARTUP - Controller startup.
+        10 - CONTROLLER_ONLINE - Controller online.
+        11 - CONTROLLER_OFFLINE - Controller offline.
+        15 - CRED_READER_ONLINE - Credential reader online.
+        16 - CRED_READER_OFFLINE - Credential reader offline.
+        48 - DOOR_ACCESS_GRANTED - Door access granted.
+        49 - DOOR_ACCESS_DENIED - Door access denied.
+        52 - DOOR_FORCED - Door forced open.
+        53 - DOOR_NOT_FORCED - Door not forced open.
+        54 - DOOR_HELD - Door held open.
+        55 - DOOR_NOT_HELD - Door not held open.
+        56 - DOOR_OPENED - Door opened.
+        57 - DOOR_CLOSED - Door closed.
+        58 - DOOR_LOCKED - Door locked.
+        59 - DOOR_UNLOCKED - Door unlocked.
+        60 - DOOR_MODE_STATIC_STATE_UNLOCKED - Door mode - Unlocked - free access.
+        61 - DOOR_MODE_STATIC_STATE_LOCKED - Door mode - No access.
+        62 - DOOR_MODE_CARD_ONLY - Door mode - Card only.
+        63 - DOOR_MODE_CARD_AND_CONFIRMING_PIN - Door mode - Card and PIN.
+        64 - DOOR_MODE_UNIQUE_PIN_ONLY - Door mode - PIN only.
+        65 - DOOR_MODE_CARD_ONLY_OR_UNIQUE_PIN - Door mode - Card or PIN.
+        86 - EXIT_REQUESTED - Exit requested.
+        87 - MOMENTARY_UNLOCK - Momentary unlock.
+        113 - POWER_PRIMARY - On primary power.
+        114 - POWER_OFF_PRIMARY - Off primary power.
+        115 - POWER_NONE - No power.
+        116 - BATTERY_OK - Battery OK.
+        117 - BATTERY_LOW - Battery low.
+        118 - BATTERY_FAIL - Battery fail.
+        125 - TAMPER_NORMAL - Tamper normal (no tamper).
+        126 - TAMPER - Tamper.
+        127 - SCHED_ACTIVE - Schedule active.
+        128 - SCHED_INACTIVE - Schedule inactive.
+        153 - EXTERNAL - Externally defined.
+        244 - BATTERY_CRITICAL - Battery critical.
+        259 - CRED_READER_POWER_CYCLE - The CredReader has had its power cycled - for example an OSDP reader reporting the power status flag as active.
+    EvtSubCode:
+      type: integer
+      format: int32
+      description: |
+        An Evt sub-code, to provide further granularity than EvtCode.
+        0 - ACCESS_DENIED_INACTIVE - Access denied - inactive.
+        6 - ACCESS_DENIED_NOT_EFFECTIVE - Access denied - not yet effective.
+        7 - ACCESS_DENIED_EXPIRED - Access denied - expired.
+        10 - ACCESS_DENIED_NO_PRIV - Access denied - no privileges.
+        11 - ACCESS_DENIED_OUTSIDE_SCHED - Access denied - outside schedule.
+        14 - ACCESS_DENIED_UNKNOWN_CRED_NUM - Access denied - unknown credential (card) number.
+        15 - ACCESS_DENIED_UNKNOWN_CRED_NUM_FORMAT - Access denied - unknown credential (card) number format.
+        17 - ACCESS_DENIED_UNKNOWN_CRED_UNIQUE_PIN - Access denied - unknown unique PIN.
+        20 - ACCESS_DENIED_INCORRECT_FACILITY_CODE - Access denied - incorrect facility code.
+        22 - ACCESS_DENIED_DOOR_MODE_STATIC_LOCKED - Access denied - door mode - static locked (no access).
+        23 - ACCESS_DENIED_DOOR_MODE_DOESNT_ALLOW_CARD - Access denied - door mode - doesn't allow card.
+        24 - ACCESS_DENIED_DOOR_MODE_DOESNT_ALLOW_UNIQUE_PIN - Access denied - door mode - doesn't allow unique PIN.
+        25 - ACCESS_DENIED_NO_CONFIRMING_PIN_FOR_CRED - Access denied - no confirming PIN for credential.
+        27 - ACCESS_DENIED_INCORRECT_CONFIRMING_PIN - Access denied - incorrect confirming PIN.
+        104 - EXTERNAL - Externally defined.
+    PrivType:
+      type: integer
+      format: int32
+      description: |
+        Type (subclass) of Priv.
+        0 - DOOR - Door access privilege.
+    SchedDay:
+      type: integer
+      format: int32
+      description: |
+        Sched day of week.
+        0 - MON - Monday.
+        1 - TUES - Tuesday.
+        2 - WED - Wednesday.
+        3 - THUR - Thursday.
+        4 - FRI - Friday.
+        5 - SAT - Saturday.
+        6 - SUN - Sunday.
