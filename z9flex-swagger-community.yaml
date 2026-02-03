@@ -2820,6 +2820,9 @@ components:
           items:
             type: string
           description: If quantityDoor is not null, or the template creates multiple doors by default, or if quantity is used to represent a number of doors, then this list of names can be used to override the default names of the multiple doors created.
+        tag:
+          type: string
+          description: Device property - tag.
         port2:
           type: integer
           format: int32
@@ -2887,6 +2890,9 @@ components:
           type: integer
           format: int32
           description: From referenced object - unid.
+        tag:
+          type: string
+          description: From referenced object - tag.
         uuid:
           type: string
           description: From referenced object - uuid.
@@ -3175,6 +3181,12 @@ components:
         pinUnique:
           type: boolean
           description: Whether the PIN is unique.  This is more often set to true than not, to allow PIN-only access.
+        registrationCode:
+          type: string
+          description: Registration code, used for certain mobile credential technologies.
+        registrationUrl:
+          type: string
+          description: Registration URL, used for certain mobile credential technologies.
     CardPinTemplate:
       type: object
       additionalProperties: true
@@ -3219,6 +3231,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3263,6 +3278,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3276,6 +3294,10 @@ components:
         cardPinTemplate:
           $ref: '#/components/schemas/CardPinTemplate'
           # Card/PIN template.
+        priority:
+          type: integer
+          format: int32
+          description: Determines the order in which credential templates should be tried, processed, downloaded, etc
     DataFormat:
       type: object
       additionalProperties: true
@@ -3285,6 +3307,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3338,6 +3363,10 @@ components:
         - type: object
           description: Binary DataFormat, used for Prox/Wiegand card formats.  It contains an element for each field, parity bit, etc. - only applicable if dataFormatType=1 (DataFormatType_BINARY)
           properties:
+            minBits:
+              type: integer
+              format: int32
+              description: Minimum number of bits.
             maxBits:
               type: integer
               format: int32
@@ -3347,6 +3376,9 @@ components:
               items:
                 $ref: '#/components/schemas/BinaryElement'
               description: Elements.
+            supportReverseRead:
+              type: boolean
+              description: Whether reverse read is supported.  If true, a normal read is checked to see if it matches the format, and then the reversed bits are tried.
     FieldBinaryElement:
       allOf:
         - $ref: '#/components/schemas/BinaryElement'
@@ -3397,6 +3429,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3410,6 +3445,10 @@ components:
         layoutType:
           $ref: '#/components/schemas/DataLayoutType'
           # Type (subclass) of DataLayout.
+        priority:
+          type: integer
+          format: int32
+          description: Priority.  Determines the order in which multiple DataLayout are applied at card read time.
         enabled:
           type: boolean
           description: Whether the DataLayout is active (enabled) or not.  if null, this should be interpreted as true (enabled).
@@ -3551,6 +3590,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3582,6 +3624,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -3853,6 +3898,9 @@ components:
           type: integer
           format: int32
           description: Unique ID.
+        invert:
+          type: boolean
+          description: Whether to invert the logic of the output.
     Controller:
       allOf:
         - $ref: '#/components/schemas/Dev'
@@ -4095,6 +4143,10 @@ components:
         evtModifiers:
           $ref: '#/components/schemas/EvtModifiers'
           # Event modifiers.
+        priority:
+          type: integer
+          format: int32
+          description: Priority.  Lower numbers mean more important.  0 is the "most important".
         data:
           type: string
           description: Extra/arbitrary data associated with the event.
@@ -4154,6 +4206,9 @@ components:
           type: integer
           format: int32
           description: From referenced Cred - facilityCode
+        tag:
+          type: string
+          description: From referenced Cred - tag
         uuid:
           type: string
           description: From referenced Cred - uuid
@@ -4169,6 +4224,9 @@ components:
         name:
           type: string
           description: From referenced CredTemplate - name
+        tag:
+          type: string
+          description: From referenced CredTemplate - tag
         uuid:
           type: string
           description: From referenced CredTemplate - uuid
@@ -4218,6 +4276,9 @@ components:
         devUse:
           $ref: '#/components/schemas/DevUse'
           # From referenced Dev - devUse
+        tag:
+          type: string
+          description: From referenced Dev - tag
         uuid:
           type: string
           description: From referenced Dev - uuid
@@ -4270,6 +4331,11 @@ components:
         name:
           type: string
           description: From referenced Sched - name
+        invert:
+          type: boolean
+        tag:
+          type: string
+          description: From referenced Sched - tag
         uuid:
           type: string
           description: From referenced Sched - uuid
@@ -4282,6 +4348,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -4324,6 +4393,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -4343,6 +4415,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -4364,6 +4439,9 @@ components:
           type: integer
           format: int32
           description: Version (for optimistic locking)
+        tag:
+          type: string
+          description: tag.
         uuid:
           type: string
           description: UUID.
@@ -4411,6 +4489,10 @@ components:
           type: string
           format: time
           description: Stopping time for the interval.
+        plusDays:
+          type: integer
+          format: int32
+          description: If set, the stopping time is the stopping time plus this many days.  This allows an interval to cross over midnight, or to span multiple days.  Not supported by all hardware.
     SchedRestriction:
       type: object
       additionalProperties: true
@@ -4419,6 +4501,9 @@ components:
         sched:
           $ref: '#/components/schemas/ObjRef'
           # Reference to (and 'type' equals) - SchedRestriction - The schedule to restrict to.  If sched is null, there is no sched restriction, unless invert is true.
+        invert:
+          type: boolean
+          description: If true, invert the schedule.
     ApiClientType:
       type: integer
       format: int32
@@ -4434,6 +4519,14 @@ components:
         0 - STATIC - Static (fixed) element - StaticBinaryElement.
         1 - PARITY - Parity - ParityBinaryElement.
         2 - FIELD - Data field - FieldBinaryElement.
+    CredComponentPresence:
+      type: integer
+      format: int32
+      description: |
+        The presence of a CredComponent.
+        0 - ABSENT - Absent.
+        1 - REQUIRED - Required.
+        2 - OPTIONAL - Optional.
     CredReaderCommType:
       type: integer
       format: int32
@@ -4483,6 +4576,7 @@ components:
       format: int32
       description: |
         Template types for creating new hardware data.
+        250 - IO_CONTROLLER_COMMUNITY - Create - Controller - Community.
     DevMod:
       type: integer
       format: int32
@@ -4493,7 +4587,10 @@ components:
         18 - ACTUATOR_DIGITAL - ACTUATOR model - digital.
         26 - IO_CONTROLLER_Z9_SPCORE - IO_CONTROLLER - Z9-Security SP-Core.
         46 - IO_CONTROLLER_EXTERNAL - Externally-defined - IO_CONTROLLER.
+        164 - IO_CONTROLLER_COMMUNITY - IO_CONTROLLER model - Community.
+        165 - IO_CONTROLLER_COMMUNITY_SUB - IO_CONTROLLER model - Community sub-controller.
         227 - CRED_READER_OSDP - CRED_READER model - OSDP (generic).
+        259 - DOOR_COMMUNITY - DOOR model - Community.
     DevModConfigType:
       type: integer
       format: int32
@@ -4505,9 +4602,10 @@ components:
       format: int32
       description: |
         Device hardware platform, or family, for a device model (DevMod) for a Dev.
-        0 - Z9_SECURITY - Z9 Security, including z9/op=n and Z9/FL=X.
+        0 - Z9_SECURITY - Z9 Security, including Z9/Open and Z9/Flex.
         9 - EXTERNAL - External.
         11 - PKOC - PKOC.
+        17 - COMMUNITY - Community.
         19 - PSIA - PSIA.
     DevSubType:
       type: integer
