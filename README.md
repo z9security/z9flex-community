@@ -33,7 +33,7 @@ The swagger file can be used with OpenAPI tools to generate client libraries in 
 
 ## C# Client Library
 
-The `z9flex-client-csharp/` directory contains a C#/.NET client library (`Z9.Flex.Community`) for the Community Profile API. It is built using [Microsoft Kiota](https://learn.microsoft.com/en-us/openapi/kiota/) to auto-generate a strongly-typed REST client from the OpenAPI specification.
+The `z9flex-client-csharp/` directory contains a C#/.NET client library (`Z9.Flex.Community`) for the Z9/Flex Community Profile API. It is built using [Microsoft Kiota](https://learn.microsoft.com/en-us/openapi/kiota/) to auto-generate a strongly-typed REST client from the OpenAPI specification.
 
 The library targets .NET Standard 2.0, making it compatible with .NET Framework 4.7+, .NET Core 2.0+, and .NET 6+.
 
