@@ -25,7 +25,66 @@ Apache 2.0 - see [LICENSE](LICENSE) for details.
 ## Files
 
 - `z9flex-swagger-community.yaml` - OpenAPI 3.0 specification
+- `z9flex-client-csharp/` - C#/.NET client library
 
 ## Usage
 
 The swagger file can be used with OpenAPI tools to generate client libraries in various languages.
+
+## C# Client Library
+
+The `z9flex-client-csharp/` directory contains a C#/.NET client library (`Z9.Flex.Community`) for the Community Profile API. It is built using [Microsoft Kiota](https://learn.microsoft.com/en-us/openapi/kiota/) to auto-generate a strongly-typed REST client from the OpenAPI specification.
+
+The library targets .NET Standard 2.0, making it compatible with .NET Framework 4.7+, .NET Core 2.0+, and .NET 6+.
+
+### Getting Started
+
+Create an authentication provider and adapter, then use the client to make API calls:
+
+```csharp
+var handler = new WinHttpHandler
+{
+    ServerCertificateValidationCallback = (message, certificate2, arg3, arg4) => true
+};
+
+var authenticationProvider = Z9AuthenticationProvider.CreateInstance(baseUrl,
+    () => (username: z9Username, password: z9Password), handler);
+
+var adapter = new HttpClientRequestAdapter(authenticationProvider,
+        httpClient: new Z9HttpClient(handler, authenticationProvider))
+    { BaseUrl = baseUrl };
+
+var flexClient = new Z9Flex.Client.FlexClient(adapter);
+```
+
+Then use the client to interact with the API:
+
+```csharp
+var devices = await flexClient.Dev.List.GetAsync();
+var schedules = await flexClient.Sched.List.GetAsync();
+```
+
+### Regenerating the Client
+
+The auto-generated client code can be regenerated from the swagger using [Microsoft Kiota](https://learn.microsoft.com/en-us/openapi/kiota/install):
+
+```bash
+dotnet tool install --global Microsoft.OpenApi.Kiota
+
+kiota generate -l CSharp -c FlexClient -n Z9Flex.Client \
+  -d z9flex-swagger-community.yaml \
+  -o z9flex-client-csharp/src/Z9Flex/Client
+```
+
+After generation, apply the following post-processing fix to the generated models. Kiota generates unqualified `Time?` references that conflict with `System.Time`, so they must be fully qualified:
+
+In `z9flex-client-csharp/src/Z9Flex/Client/Models/SchedElement.cs`, replace:
+```csharp
+public Time? Start { get; set; }
+public Time? Stop { get; set; }
+```
+with:
+```csharp
+public Microsoft.Kiota.Abstractions.Time? Start { get; set; }
+public Microsoft.Kiota.Abstractions.Time? Stop { get; set; }
+```
