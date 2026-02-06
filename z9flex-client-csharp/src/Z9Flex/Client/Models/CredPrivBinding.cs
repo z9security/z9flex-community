@@ -23,6 +23,14 @@ namespace Z9Flex.Client.Models
 #else
         public global::Z9Flex.Client.Models.ObjRef DevAsDoorAccessPriv { get; set; }
 #endif
+        /// <summary>Reference to another object, including type, with all possible identity properties, as well as name.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Z9Flex.Client.Models.ObjRef? Priv { get; set; }
+#nullable restore
+#else
+        public global::Z9Flex.Client.Models.ObjRef Priv { get; set; }
+#endif
         /// <summary>Restriction by Sched.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -59,6 +67,7 @@ namespace Z9Flex.Client.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "devAsDoorAccessPriv", n => { DevAsDoorAccessPriv = n.GetObjectValue<global::Z9Flex.Client.Models.ObjRef>(global::Z9Flex.Client.Models.ObjRef.CreateFromDiscriminatorValue); } },
+                { "priv", n => { Priv = n.GetObjectValue<global::Z9Flex.Client.Models.ObjRef>(global::Z9Flex.Client.Models.ObjRef.CreateFromDiscriminatorValue); } },
                 { "schedRestriction", n => { SchedRestriction = n.GetObjectValue<global::Z9Flex.Client.Models.SchedRestriction>(global::Z9Flex.Client.Models.SchedRestriction.CreateFromDiscriminatorValue); } },
                 { "unid", n => { Unid = n.GetIntValue(); } },
             };
@@ -71,6 +80,7 @@ namespace Z9Flex.Client.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Z9Flex.Client.Models.ObjRef>("devAsDoorAccessPriv", DevAsDoorAccessPriv);
+            writer.WriteObjectValue<global::Z9Flex.Client.Models.ObjRef>("priv", Priv);
             writer.WriteObjectValue<global::Z9Flex.Client.Models.SchedRestriction>("schedRestriction", SchedRestriction);
             writer.WriteIntValue("unid", Unid);
             writer.WriteAdditionalData(AdditionalData);
