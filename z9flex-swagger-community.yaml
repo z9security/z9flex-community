@@ -3540,6 +3540,9 @@ components:
         schedRestriction:
           $ref: '#/components/schemas/SchedRestriction'
           # Schedule restriction
+        priv:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - CredPrivBinding - The privilege
         devAsDoorAccessPriv:
           $ref: '#/components/schemas/ObjRef'
           # Reference to (and 'type' equals) - CredPrivBinding - In lieu of a DoorAccessPriv, this allows a Dev to be treated as a DoorAccessPriv.  In combination with other restrictions, this can be used for "precision access".  For Door access, the Dev can be either a Door or a DevGroup.  This is ignored when processing other Priv subclasses.
