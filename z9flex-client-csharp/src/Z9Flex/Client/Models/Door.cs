@@ -13,13 +13,13 @@ namespace Z9Flex.Client.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Door : global::Z9Flex.Client.Models.Dev, IParsable
     {
-        /// <summary>The doorConfig property</summary>
+        /// <summary>DevConfig for a Door.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? DoorConfig { get; set; }
+        public global::Z9Flex.Client.Models.DoorConfig? DoorConfig { get; set; }
 #nullable restore
 #else
-        public UntypedNode DoorConfig { get; set; }
+        public global::Z9Flex.Client.Models.DoorConfig DoorConfig { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,7 +39,7 @@ namespace Z9Flex.Client.Models
         {
             return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
             {
-                { "doorConfig", n => { DoorConfig = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "doorConfig", n => { DoorConfig = n.GetObjectValue<global::Z9Flex.Client.Models.DoorConfig>(global::Z9Flex.Client.Models.DoorConfig.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z9Flex.Client.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteObjectValue<UntypedNode>("doorConfig", DoorConfig);
+            writer.WriteObjectValue<global::Z9Flex.Client.Models.DoorConfig>("doorConfig", DoorConfig);
         }
     }
 }

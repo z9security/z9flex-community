@@ -3501,6 +3501,7 @@ components:
     EncryptionKeyRef:
       type: object
       additionalProperties: true
+      description: Reference to an encryption key in a keystore. Does not store the actual key.
       properties:
         unid:
           type: integer
@@ -3718,6 +3719,7 @@ components:
     DevModConfig:
       type: object
       additionalProperties: true
+      description: DevMod-specific configuration for a Dev. Subclasses correspond to different DevMod values.
       properties:
         unid:
           type: integer
@@ -3729,6 +3731,7 @@ components:
           description: Version (for optimistic locking)
         type:
           $ref: '#/components/schemas/DevModConfigType'
+          # The device module configuration type.
       discriminator:
         propertyName: type
         mapping:
@@ -3849,7 +3852,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/DevActionParams'
         - type: object
-          description: only applicable if type=1 (DevActionParamsType_DOOR_MODE)
+          description: DevActionParams for DevActionParamsType.DOOR_MODE. - only applicable if type=1 (DevActionParamsType_DOOR_MODE)
           properties:
             resetToDefault:
               type: boolean
@@ -4005,6 +4008,55 @@ components:
             doorConfig:
               $ref: '#/components/schemas/DoorConfig'
               # Door configuration
+    DoorConfig:
+      type: object
+      additionalProperties: true
+      description: DevConfig for a Door.
+      properties:
+        version:
+          type: integer
+          format: int32
+          description: Version (for optimistic locking)
+        username:
+          type: string
+          description: username to connect to the device.
+        password:
+          type: string
+          description: password to connect to the device.
+        devInitiatesConnection:
+          type: boolean
+          description: Used for communications where connection initiation direction is configurable.  Most commonly used for TCP connections, where the Dev may be either the "client" or "server" end of the socket.
+        encryptionKeyRef:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - DoorConfig - Current EncryptionKeyRef used to encrypt communications.
+        encryptionKeyRefNext:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - DoorConfig - For changing keys, the next EncryptionKeyRef.  This allows us to update encryptionKeyRef only after the keys have been updated on the device.  And also, if anything goes wrong, we have both keys.
+        disableEncryption:
+          type: boolean
+          description: Disable encryption, generally for OSDP readers/subcontrollers that would otherwise be using Secure Channel.  Intended to be used for diagnostics only, not recommended for production.
+        defaultDoorMode:
+          $ref: '#/components/schemas/DoorMode'
+          # Default door mode.
+        activateStrikeOnRex:
+          type: boolean
+          description: True if the REX is not physically linked to the strike, and therefore the controller needs to activate the strike on REX. In many cases, the REX signal simply indicates that the user has unlocked the door from the inside, and the strike does not need to be involved. For example, many crash bars for exit, and electrified locksets work this way. In other cases, for convenience or fire code compliance, the REX directly unlocks the door electrically, by, for example, cutting the power to a mag lock.
+        strikeTime:
+          type: integer
+          format: int32
+          description: The time in milliseconds to activate the door strike.
+        extendedStrikeTime:
+          type: integer
+          format: int32
+          description: The time in milliseconds to activate the door strike - extended (for disabled users, for example).
+        heldTime:
+          type: integer
+          format: int32
+          description: The time in milliseconds after which the door is considered held open.
+        extendedHeldTime:
+          type: integer
+          format: int32
+          description: The time in milliseconds after which the door is considered held open - extended (for disabled users, for example).
     DoorMode:
       type: object
       additionalProperties: true
@@ -4371,19 +4423,25 @@ components:
           description: Reference to (and 'type' equals) - HolType
         allHolTypes:
           type: boolean
+          description: Whether this holiday is a member of all holiday types.
         date:
           type: string
           format: date
+          description: The date of the holiday.
         numDays:
           type: integer
           format: int32
+          description: Number of days the holiday lasts (1 minimum).
         repeat:
           type: boolean
+          description: Whether the holiday repeats every year.
         numYearsRepeat:
           type: integer
           format: int32
+          description: Number of years to repeat. Null for indefinitely.
         preserveSchedDay:
           type: boolean
+          description: If true, SchedDay is preserved on this holiday.
         holCal:
           $ref: '#/components/schemas/ObjRef'
           # Reference to (and 'type' equals) - Hol

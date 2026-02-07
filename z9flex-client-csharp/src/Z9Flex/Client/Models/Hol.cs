@@ -16,9 +16,9 @@ namespace Z9Flex.Client.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The allHolTypes property</summary>
+        /// <summary>Whether this holiday is a member of all holiday types.</summary>
         public bool? AllHolTypes { get; set; }
-        /// <summary>The date property</summary>
+        /// <summary>The date of the holiday.</summary>
         public Date? Date { get; set; }
         /// <summary>Reference to another object, including type, with all possible identity properties, as well as name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -44,13 +44,13 @@ namespace Z9Flex.Client.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The numDays property</summary>
+        /// <summary>Number of days the holiday lasts (1 minimum).</summary>
         public int? NumDays { get; set; }
-        /// <summary>The numYearsRepeat property</summary>
+        /// <summary>Number of years to repeat. Null for indefinitely.</summary>
         public int? NumYearsRepeat { get; set; }
-        /// <summary>The preserveSchedDay property</summary>
+        /// <summary>If true, SchedDay is preserved on this holiday.</summary>
         public bool? PreserveSchedDay { get; set; }
-        /// <summary>The repeat property</summary>
+        /// <summary>Whether the holiday repeats every year.</summary>
         public bool? Repeat { get; set; }
         /// <summary>tag.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

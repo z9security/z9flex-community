@@ -37,9 +37,9 @@ namespace Z9Flex.Client.Models
         public List<int?> SchedDays { get; set; }
 #endif
         /// <summary>Starting time for the interval.</summary>
-        public Microsoft.Kiota.Abstractions.Time? Start { get; set; }
+        public Time? Start { get; set; }
         /// <summary>Stopping time for the interval.</summary>
-        public Microsoft.Kiota.Abstractions.Time? Stop { get; set; }
+        public Time? Stop { get; set; }
         /// <summary>Unique ID.</summary>
         public int? Unid { get; set; }
         /// <summary>

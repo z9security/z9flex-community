@@ -33,7 +33,7 @@ namespace Z9Flex.Client.Models
 #endif
         /// <summary>Model for a Dev (device).0 - IO_CONTROLLER_Z9_CUSTOM - IO_CONTROLLER model - z9io - Custom.14 - SENSOR_DIGITAL - SENSOR model - digital.18 - ACTUATOR_DIGITAL - ACTUATOR model - digital.26 - IO_CONTROLLER_Z9_SPCORE - IO_CONTROLLER - Z9-Security SP-Core.46 - IO_CONTROLLER_EXTERNAL - Externally-defined - IO_CONTROLLER.164 - IO_CONTROLLER_COMMUNITY - IO_CONTROLLER model - Community.165 - IO_CONTROLLER_COMMUNITY_SUB - IO_CONTROLLER model - Community sub-controller.227 - CRED_READER_OSDP - CRED_READER model - OSDP (generic).259 - DOOR_COMMUNITY - DOOR model - Community.</summary>
         public int? DevMod { get; set; }
-        /// <summary>The devModConfig property</summary>
+        /// <summary>DevMod-specific configuration for a Dev. Subclasses correspond to different DevMod values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Z9Flex.Client.Models.DevModConfig? DevModConfig { get; set; }
