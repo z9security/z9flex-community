@@ -51,6 +51,22 @@ namespace Z9Flex.Client.Models
         public int? DevUse { get; set; }
         /// <summary>true if the device is enabled, false if disabled.</summary>
         public bool? Enabled { get; set; }
+        /// <summary>If devMod is EXTERNAL, a machine-readable model identifier.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalDevModId { get; set; }
+#nullable restore
+#else
+        public string ExternalDevModId { get; set; }
+#endif
+        /// <summary>If devMod is EXTERNAL, a text description of the model.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalDevModText { get; set; }
+#nullable restore
+#else
+        public string ExternalDevModText { get; set; }
+#endif
         /// <summary>The externalId property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -187,6 +203,8 @@ namespace Z9Flex.Client.Models
                 { "devType", n => { DevType = n.GetIntValue(); } },
                 { "devUse", n => { DevUse = n.GetIntValue(); } },
                 { "enabled", n => { Enabled = n.GetBoolValue(); } },
+                { "externalDevModId", n => { ExternalDevModId = n.GetStringValue(); } },
+                { "externalDevModText", n => { ExternalDevModText = n.GetStringValue(); } },
                 { "externalId", n => { ExternalId = n.GetStringValue(); } },
                 { "ignoreDaylightSavings", n => { IgnoreDaylightSavings = n.GetBoolValue(); } },
                 { "logicalAddress", n => { LogicalAddress = n.GetIntValue(); } },
@@ -221,6 +239,8 @@ namespace Z9Flex.Client.Models
             writer.WriteIntValue("devType", DevType);
             writer.WriteIntValue("devUse", DevUse);
             writer.WriteBoolValue("enabled", Enabled);
+            writer.WriteStringValue("externalDevModId", ExternalDevModId);
+            writer.WriteStringValue("externalDevModText", ExternalDevModText);
             writer.WriteStringValue("externalId", ExternalId);
             writer.WriteBoolValue("ignoreDaylightSavings", IgnoreDaylightSavings);
             writer.WriteIntValue("logicalAddress", LogicalAddress);

@@ -1325,6 +1325,93 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /devStateRecord/list:
+    get:
+      tags:
+      - DevState
+      summary: List DevStateRecord
+      operationId: listDevStateRecord
+      parameters:
+      - name: offset
+        in: query
+        description: Offset of the first result to return. Defaults to 0 if not present.
+        required: false
+        schema:
+          type: integer
+      - name: max
+        in: query
+        description: Maximum number of results to return
+        required: false
+        schema:
+          type: integer
+      - name: order
+        in: query
+        description: Whether to order ascending or descending
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: devModRestriction.devMods
+        in: query
+        description: DevModRestriction DevMod value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevMod"
+      - name: devUseRestriction.devUses
+        in: query
+        description: DevUseRestriction DevUse value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevUse"
+      - name: devTypeRestriction.devTypes
+        in: query
+        description: DevTypeRestriction DevType value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevType"
+      - name: devSubTypeRestriction.devSubTypes
+        in: query
+        description: DevSubTypeRestriction DevSubType value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: "#/components/schemas/DevSubType"
+      - name: specificDevRestriction.devs
+        in: query
+        description: SpecificDevRestriction Dev unid value(s)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevStateRecordListResponse"
+      security:
+      - APIKeyAuth: []
   /door/delete/{id}:
     post:
       tags:
@@ -3009,6 +3096,28 @@ components:
           items:
             $ref: '#/components/schemas/Dev'
           description: The list of objects matching the request, subject to pagination parameters.
+    DevStateRecordListResponse:
+      type: object
+      additionalProperties: true
+      description: Response data structure for - /devStateRecord/list
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - offset
+        max:
+          type: integer
+          format: int32
+          description: Pagination parameter passed into the request - max
+        count:
+          type: integer
+          format: int32
+          description: Total count of objects matching the request, regardless of pagination.
+        instanceList:
+          type: array
+          items:
+            $ref: '#/components/schemas/DevStateRecord'
+          description: The list of objects matching the request, subject to pagination parameters.
     EncryptionKeyListResponse:
       type: object
       additionalProperties: true
@@ -3679,6 +3788,12 @@ components:
         devPlatform:
           $ref: '#/components/schemas/DevPlatform'
           # Device platform.
+        externalDevModText:
+          type: string
+          description: If devMod is EXTERNAL, a text description of the model.
+        externalDevModId:
+          type: string
+          description: If devMod is EXTERNAL, a machine-readable model identifier.
         devModConfig:
           $ref: '#/components/schemas/DevModConfig'
           # Device-model-specific configuration.
@@ -3864,6 +3979,80 @@ components:
         - type: object
           description: DevActionParams for door momentary unlock action (DevActionType.DOOR_MOMENTARY_UNLOCK). - only applicable if type=10 (DevActionParamsType_DOOR_MOMENTARY_UNLOCK)
           properties:
+    DevAspectState:
+      type: object
+      additionalProperties: true
+      description: The state of a single DevAspect for a Dev.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        devAspect:
+          $ref: '#/components/schemas/DevAspect'
+          # The aspect of the device being represented by this state object.
+        hwTime:
+          type: string
+          format: date-time
+          description: Time occurred at hardware.  Stored in server local time.  Presentation time zone is determined by getTimeZone().
+        dbTime:
+          type: string
+          format: date-time
+          description: Time recorded in DB.  Stored in server local time.  Presentation time zone is the time zone of the server.
+        commState:
+          $ref: '#/components/schemas/CommState'
+          # Communications state of the device - online/offline.
+        commStateStale:
+          type: boolean
+          description: If true, corresponding property is stale - commState
+        activityState:
+          $ref: '#/components/schemas/ActivityState'
+          # Activity state of the device (generally Sensor or Actuator) - whether it is active or inactive, but also includes warning, and repeating pulse. 
+        activityStateStale:
+          type: boolean
+          description: If true, corresponding property is stale - activityState
+        doorMode:
+          $ref: '#/components/schemas/DoorMode'
+          # The door mode of the device.  Only applicable to a Door.
+        doorModeStale:
+          type: boolean
+          description: If true, corresponding property is stale - doorMode
+        externalState:
+          type: string
+          description: Externally-defined state text (presentable to a user).
+        externalStateStale:
+          type: boolean
+          description: If true, corresponding property is stale - externalState
+    DevState:
+      type: object
+      additionalProperties: true
+      description: The state of a Dev, including all DevAspect.
+      properties:
+        devAspectStates:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                $ref: '#/components/schemas/DevAspect'
+              value:
+                $ref: '#/components/schemas/DevAspectState'
+          description: The states for each device aspect.
+    DevStateRecord:
+      type: object
+      additionalProperties: true
+      description: An association of a Dev with its DevState.
+      properties:
+        unid:
+          type: integer
+          format: int32
+          description: Unique ID.
+        dev:
+          $ref: '#/components/schemas/ObjRef'
+          # Reference to (and 'type' equals) - DevStateRecord - Device.
+        devState:
+          $ref: '#/components/schemas/DevState'
+          # Device state.
     Actuator:
       allOf:
         - $ref: '#/components/schemas/Dev'
@@ -4565,6 +4754,13 @@ components:
         invert:
           type: boolean
           description: If true, invert the schedule.
+    ActivityState:
+      type: integer
+      format: int32
+      description: |
+        Activity state of a Dev (generally Sensor or Actuator) - whether it is active or inactive, but also includes warning, and repeating pulse.
+        0 - INACTIVE - Inactive, off.
+        1 - ACTIVE - Active, on.
     ApiClientType:
       type: integer
       format: int32
@@ -4580,6 +4776,13 @@ components:
         0 - STATIC - Static (fixed) element - StaticBinaryElement.
         1 - PARITY - Parity - ParityBinaryElement.
         2 - FIELD - Data field - FieldBinaryElement.
+    CommState:
+      type: integer
+      format: int32
+      description: |
+        Communications state of a Dev - online/offline.
+        0 - OFFLINE - Offline.
+        1 - ONLINE - Online.
     CredComponentPresence:
       type: integer
       format: int32
@@ -4632,6 +4835,16 @@ components:
         Indicates subclass of DevActionParams.
         1 - DOOR_MODE - DoorModeDevActionParams, for DevActionType.DOOR_MODE_CHANGE.
         10 - DOOR_MOMENTARY_UNLOCK - DoorMomentaryUnlockDevActionParams, for DevActionType.DOOR_MOMENTARY_UNLOCK.
+    DevAspect:
+      type: integer
+      format: int32
+      description: |
+        An aspect of the state of a Dev.
+        0 - PRIMARY - Primary aspect.  Most devices only have a single aspect, this one.
+        5 - DOOR_FORCED - Door - forced.
+        6 - DOOR_HELD - Door - held.
+        15 - DOOR_UNLOCKED - Door - unlocked.
+        16 - DOOR_OPEN - Door - open.
     DevCreationTemplateType:
       type: integer
       format: int32

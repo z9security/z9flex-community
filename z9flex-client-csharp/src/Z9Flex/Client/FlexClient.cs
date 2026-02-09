@@ -22,6 +22,7 @@ using Z9Flex.Client.CredTemplate;
 using Z9Flex.Client.DataFormat;
 using Z9Flex.Client.DataLayout;
 using Z9Flex.Client.Dev;
+using Z9Flex.Client.DevStateRecord;
 using Z9Flex.Client.Door;
 using Z9Flex.Client.DoorAccessPriv;
 using Z9Flex.Client.EncryptionKey;
@@ -101,6 +102,11 @@ namespace Z9Flex.Client
         public global::Z9Flex.Client.Dev.DevRequestBuilder Dev
         {
             get => new global::Z9Flex.Client.Dev.DevRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The devStateRecord property</summary>
+        public global::Z9Flex.Client.DevStateRecord.DevStateRecordRequestBuilder DevStateRecord
+        {
+            get => new global::Z9Flex.Client.DevStateRecord.DevStateRecordRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The door property</summary>
         public global::Z9Flex.Client.Door.DoorRequestBuilder Door
