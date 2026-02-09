@@ -4732,6 +4732,7 @@ components:
         11 - CONTROLLER_OFFLINE - Controller offline.
         15 - CRED_READER_ONLINE - Credential reader online.
         16 - CRED_READER_OFFLINE - Credential reader offline.
+        17 - RAW_CRED_READ - Raw credential read.
         48 - DOOR_ACCESS_GRANTED - Door access granted.
         49 - DOOR_ACCESS_DENIED - Door access denied.
         52 - DOOR_FORCED - Door forced open.
