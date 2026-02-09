@@ -16,7 +16,6 @@ using Z9Flex.Client.BasicDataLayout;
 using Z9Flex.Client.BinaryFormat;
 using Z9Flex.Client.Controller;
 using Z9Flex.Client.Cred;
-using Z9Flex.Client.CredHolder;
 using Z9Flex.Client.CredReader;
 using Z9Flex.Client.CredTemplate;
 using Z9Flex.Client.DataFormat;
@@ -72,11 +71,6 @@ namespace Z9Flex.Client
         public global::Z9Flex.Client.Cred.CredRequestBuilder Cred
         {
             get => new global::Z9Flex.Client.Cred.CredRequestBuilder(PathParameters, RequestAdapter);
-        }
-        /// <summary>The credHolder property</summary>
-        public global::Z9Flex.Client.CredHolder.CredHolderRequestBuilder CredHolder
-        {
-            get => new global::Z9Flex.Client.CredHolder.CredHolderRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The credReader property</summary>
         public global::Z9Flex.Client.CredReader.CredReaderRequestBuilder CredReader

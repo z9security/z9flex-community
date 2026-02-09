@@ -2748,34 +2748,6 @@ paths:
       - APIKeyAuth: []
 
 
-  /credHolder/import:
-    post:
-      summary: Import CredHolder (credential holder) CSV file
-      tags:
-        - CredHolder
-      operationId: importCredHolder
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                # 'file' will be the field name in this multipart request
-                file:
-                  type: string
-                  format: binary
-      security:
-        - APIKeyAuth: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  instanceCount:
-                    type: integer
 components:
   securitySchemes:
     APIKeyAuth:
