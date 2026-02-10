@@ -3977,6 +3977,12 @@ components:
         commStateStale:
           type: boolean
           description: If true, corresponding property is stale - commState
+        tamperState:
+          $ref: '#/components/schemas/TamperState'
+          # Tamper state of the device.
+        tamperStateStale:
+          type: boolean
+          description: If true, corresponding property is stale - tamperState
         activityState:
           $ref: '#/components/schemas/ActivityState'
           # Activity state of the device (generally Sensor or Actuator) - whether it is active or inactive, but also includes warning, and repeating pulse. 
@@ -4987,3 +4993,10 @@ components:
         4 - FRI - Friday.
         5 - SAT - Saturday.
         6 - SUN - Sunday.
+    TamperState:
+      type: integer
+      format: int32
+      description: |
+        Tamper state of a Dev.
+        0 - NORMAL - Normal.
+        1 - TAMPER - Tamper.

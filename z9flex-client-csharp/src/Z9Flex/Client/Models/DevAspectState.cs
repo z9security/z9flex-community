@@ -49,6 +49,10 @@ namespace Z9Flex.Client.Models
         public bool? ExternalStateStale { get; set; }
         /// <summary>Time occurred at hardware.  Stored in server local time.  Presentation time zone is determined by getTimeZone().</summary>
         public DateTimeOffset? HwTime { get; set; }
+        /// <summary>Tamper state of a Dev.0 - NORMAL - Normal.1 - TAMPER - Tamper.</summary>
+        public int? TamperState { get; set; }
+        /// <summary>If true, corresponding property is stale - tamperState</summary>
+        public bool? TamperStateStale { get; set; }
         /// <summary>Unique ID.</summary>
         public int? Unid { get; set; }
         /// <summary>
@@ -87,6 +91,8 @@ namespace Z9Flex.Client.Models
                 { "externalState", n => { ExternalState = n.GetStringValue(); } },
                 { "externalStateStale", n => { ExternalStateStale = n.GetBoolValue(); } },
                 { "hwTime", n => { HwTime = n.GetDateTimeOffsetValue(); } },
+                { "tamperState", n => { TamperState = n.GetIntValue(); } },
+                { "tamperStateStale", n => { TamperStateStale = n.GetBoolValue(); } },
                 { "unid", n => { Unid = n.GetIntValue(); } },
             };
         }
@@ -108,6 +114,8 @@ namespace Z9Flex.Client.Models
             writer.WriteStringValue("externalState", ExternalState);
             writer.WriteBoolValue("externalStateStale", ExternalStateStale);
             writer.WriteDateTimeOffsetValue("hwTime", HwTime);
+            writer.WriteIntValue("tamperState", TamperState);
+            writer.WriteBoolValue("tamperStateStale", TamperStateStale);
             writer.WriteIntValue("unid", Unid);
             writer.WriteAdditionalData(AdditionalData);
         }
