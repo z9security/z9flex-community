@@ -44,6 +44,22 @@ namespace Z9Flex
                     { BaseUrl = baseUrl }), credentialsCallback);
         }
 
+        /// <summary>
+        /// Creates a new instance of Z9AuthenticationProvider with a cross-platform HttpMessageHandler.
+        /// </summary>
+        /// <param name="baseUrl">The base URL of the Z9Flex application.</param>
+        /// <param name="credentialsCallback">A callback function that provides the credentials for authentication.</param>
+        /// <param name="httpMessageHandler">An HttpMessageHandler to be used for HTTP requests.</param>
+        /// <returns>A new instance of Z9AuthenticationProvider.</returns>
+        public static Z9AuthenticationProvider CreateInstance(string baseUrl, CredentialsCallback credentialsCallback,
+            HttpMessageHandler httpMessageHandler)
+        {
+            return new Z9AuthenticationProvider(
+                new FlexClient(new HttpClientRequestAdapter(new AnonymousAuthenticationProvider(),
+                        httpClient: new HttpClient(httpMessageHandler))
+                    { BaseUrl = baseUrl }), credentialsCallback);
+        }
+
         /// <inheritdoc />
         public async Task AuthenticateRequestAsync(RequestInformation request,
             Dictionary<string, object> additionalAuthenticationContext = null,
