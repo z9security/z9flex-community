@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.Door.Delete;
 using Z9Flex.Client.Door.List;
 using Z9Flex.Client.Door.Save;
+using Z9Flex.Client.Door.Show;
 using Z9Flex.Client.Door.Update;
 namespace Z9Flex.Client.Door
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.Door
         public global::Z9Flex.Client.Door.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.Door.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.Door.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.Door.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.Door.Update.UpdateRequestBuilder Update

@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.Sched.Delete;
 using Z9Flex.Client.Sched.List;
 using Z9Flex.Client.Sched.Save;
+using Z9Flex.Client.Sched.Show;
 using Z9Flex.Client.Sched.Update;
 namespace Z9Flex.Client.Sched
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.Sched
         public global::Z9Flex.Client.Sched.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.Sched.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.Sched.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.Sched.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.Sched.Update.UpdateRequestBuilder Update

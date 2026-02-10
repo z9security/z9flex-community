@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.HolCal.Delete;
 using Z9Flex.Client.HolCal.List;
 using Z9Flex.Client.HolCal.Save;
+using Z9Flex.Client.HolCal.Show;
 using Z9Flex.Client.HolCal.Update;
 namespace Z9Flex.Client.HolCal
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.HolCal
         public global::Z9Flex.Client.HolCal.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.HolCal.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.HolCal.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.HolCal.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.HolCal.Update.UpdateRequestBuilder Update

@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.DataLayout.Delete;
 using Z9Flex.Client.DataLayout.List;
 using Z9Flex.Client.DataLayout.Save;
+using Z9Flex.Client.DataLayout.Show;
 using Z9Flex.Client.DataLayout.Update;
 namespace Z9Flex.Client.DataLayout
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.DataLayout
         public global::Z9Flex.Client.DataLayout.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.DataLayout.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.DataLayout.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.DataLayout.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.DataLayout.Update.UpdateRequestBuilder Update

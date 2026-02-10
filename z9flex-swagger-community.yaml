@@ -109,6 +109,31 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /actuator/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show Actuator
+      operationId: showActuator
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
   /actuator/update/{id}:
     post:
       tags:
@@ -249,6 +274,31 @@ paths:
                     $ref: "#/components/schemas/DataLayout"
       security:
       - APIKeyAuth: []
+  /basicDataLayout/show/{id}:
+    get:
+      tags:
+      - DataLayout
+      summary: Show BasicDataLayout
+      operationId: showBasicDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
   /basicDataLayout/update/{id}:
     post:
       tags:
@@ -358,6 +408,31 @@ paths:
             schema:
               $ref: "#/components/schemas/DataFormat"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
+  /binaryFormat/show/{id}:
+    get:
+      tags:
+      - DataFormat
+      summary: Show BinaryFormat
+      operationId: showBinaryFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -511,6 +586,31 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /controller/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show Controller
+      operationId: showController
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
   /controller/update/{id}:
     post:
       tags:
@@ -630,6 +730,31 @@ paths:
             schema:
               $ref: "#/components/schemas/Cred"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Cred"
+      security:
+      - APIKeyAuth: []
+  /cred/show/{id}:
+    get:
+      tags:
+      - Cred
+      summary: Show Cred
+      operationId: showCred
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Cred"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -783,6 +908,31 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /credReader/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show CredReader
+      operationId: showCredReader
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
   /credReader/update/{id}:
     post:
       tags:
@@ -892,6 +1042,31 @@ paths:
             schema:
               $ref: "#/components/schemas/CredTemplate"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/CredTemplate"
+      security:
+      - APIKeyAuth: []
+  /credTemplate/show/{id}:
+    get:
+      tags:
+      - CredTemplate
+      summary: Show CredTemplate
+      operationId: showCredTemplate
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the CredTemplate"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -1025,6 +1200,31 @@ paths:
                     $ref: "#/components/schemas/DataFormat"
       security:
       - APIKeyAuth: []
+  /dataFormat/show/{id}:
+    get:
+      tags:
+      - DataFormat
+      summary: Show DataFormat
+      operationId: showDataFormat
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataFormat"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataFormat"
+      security:
+      - APIKeyAuth: []
   /dataFormat/update/{id}:
     post:
       tags:
@@ -1134,6 +1334,31 @@ paths:
             schema:
               $ref: "#/components/schemas/DataLayout"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/DataLayout"
+      security:
+      - APIKeyAuth: []
+  /dataLayout/show/{id}:
+    get:
+      tags:
+      - DataLayout
+      summary: Show DataLayout
+      operationId: showDataLayout
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the DataLayout"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -1275,6 +1500,31 @@ paths:
             schema:
               $ref: "#/components/schemas/Dev"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /dev/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show Dev
+      operationId: showDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -1515,6 +1765,31 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /door/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show Door
+      operationId: showDoor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
   /door/update/{id}:
     post:
       tags:
@@ -1636,6 +1911,31 @@ paths:
                     $ref: "#/components/schemas/Priv"
       security:
       - APIKeyAuth: []
+  /doorAccessPriv/show/{id}:
+    get:
+      tags:
+      - Priv
+      summary: Show DoorAccessPriv
+      operationId: showDoorAccessPriv
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Priv"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Priv"
+      security:
+      - APIKeyAuth: []
   /doorAccessPriv/update/{id}:
     post:
       tags:
@@ -1745,6 +2045,31 @@ paths:
             schema:
               $ref: "#/components/schemas/EncryptionKey"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/EncryptionKey"
+      security:
+      - APIKeyAuth: []
+  /encryptionKey/show/{id}:
+    get:
+      tags:
+      - EncryptionKey
+      summary: Show EncryptionKey
+      operationId: showEncryptionKey
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the EncryptionKey"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -1950,6 +2275,31 @@ paths:
                     $ref: "#/components/schemas/Hol"
       security:
       - APIKeyAuth: []
+  /hol/show/{id}:
+    get:
+      tags:
+      - Hol
+      summary: Show Hol
+      operationId: showHol
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Hol"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Hol"
+      security:
+      - APIKeyAuth: []
   /hol/update/{id}:
     post:
       tags:
@@ -2071,6 +2421,31 @@ paths:
                     $ref: "#/components/schemas/HolCal"
       security:
       - APIKeyAuth: []
+  /holCal/show/{id}:
+    get:
+      tags:
+      - HolCal
+      summary: Show HolCal
+      operationId: showHolCal
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolCal"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolCal"
+      security:
+      - APIKeyAuth: []
   /holCal/update/{id}:
     post:
       tags:
@@ -2180,6 +2555,31 @@ paths:
             schema:
               $ref: "#/components/schemas/HolType"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/HolType"
+      security:
+      - APIKeyAuth: []
+  /holType/show/{id}:
+    get:
+      tags:
+      - HolType
+      summary: Show HolType
+      operationId: showHolType
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the HolType"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -2431,6 +2831,31 @@ paths:
                     $ref: "#/components/schemas/Dev"
       security:
       - APIKeyAuth: []
+  /nodeDev/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show NodeDev
+      operationId: showNodeDev
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
   /nodeDev/update/{id}:
     post:
       tags:
@@ -2540,6 +2965,31 @@ paths:
             schema:
               $ref: "#/components/schemas/Sched"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Sched"
+      security:
+      - APIKeyAuth: []
+  /sched/show/{id}:
+    get:
+      tags:
+      - Sched
+      summary: Show Sched
+      operationId: showSched
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Sched"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK
@@ -2681,6 +3131,31 @@ paths:
             schema:
               $ref: "#/components/schemas/Dev"
         required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    $ref: "#/components/schemas/Dev"
+      security:
+      - APIKeyAuth: []
+  /sensor/show/{id}:
+    get:
+      tags:
+      - Dev
+      summary: Show Sensor
+      operationId: showSensor
+      parameters:
+      - name: id
+        in: path
+        description: "Numeric unid, or string UUID, of the Dev"
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: OK

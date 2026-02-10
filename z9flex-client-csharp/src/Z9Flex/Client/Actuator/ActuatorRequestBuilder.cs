@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.Actuator.Delete;
 using Z9Flex.Client.Actuator.List;
 using Z9Flex.Client.Actuator.Save;
+using Z9Flex.Client.Actuator.Show;
 using Z9Flex.Client.Actuator.Update;
 namespace Z9Flex.Client.Actuator
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.Actuator
         public global::Z9Flex.Client.Actuator.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.Actuator.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.Actuator.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.Actuator.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.Actuator.Update.UpdateRequestBuilder Update

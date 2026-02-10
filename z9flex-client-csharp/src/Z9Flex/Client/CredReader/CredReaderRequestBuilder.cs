@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.CredReader.Delete;
 using Z9Flex.Client.CredReader.List;
 using Z9Flex.Client.CredReader.Save;
+using Z9Flex.Client.CredReader.Show;
 using Z9Flex.Client.CredReader.Update;
 namespace Z9Flex.Client.CredReader
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.CredReader
         public global::Z9Flex.Client.CredReader.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.CredReader.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.CredReader.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.CredReader.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.CredReader.Update.UpdateRequestBuilder Update

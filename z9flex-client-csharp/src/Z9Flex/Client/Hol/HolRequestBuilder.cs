@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.Hol.Delete;
 using Z9Flex.Client.Hol.List;
 using Z9Flex.Client.Hol.Save;
+using Z9Flex.Client.Hol.Show;
 using Z9Flex.Client.Hol.Update;
 namespace Z9Flex.Client.Hol
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.Hol
         public global::Z9Flex.Client.Hol.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.Hol.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.Hol.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.Hol.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.Hol.Update.UpdateRequestBuilder Update

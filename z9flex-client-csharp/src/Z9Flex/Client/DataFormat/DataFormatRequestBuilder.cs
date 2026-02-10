@@ -9,6 +9,7 @@ using System;
 using Z9Flex.Client.DataFormat.Delete;
 using Z9Flex.Client.DataFormat.List;
 using Z9Flex.Client.DataFormat.Save;
+using Z9Flex.Client.DataFormat.Show;
 using Z9Flex.Client.DataFormat.Update;
 namespace Z9Flex.Client.DataFormat
 {
@@ -32,6 +33,11 @@ namespace Z9Flex.Client.DataFormat
         public global::Z9Flex.Client.DataFormat.Save.SaveRequestBuilder Save
         {
             get => new global::Z9Flex.Client.DataFormat.Save.SaveRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The show property</summary>
+        public global::Z9Flex.Client.DataFormat.Show.ShowRequestBuilder Show
+        {
+            get => new global::Z9Flex.Client.DataFormat.Show.ShowRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The update property</summary>
         public global::Z9Flex.Client.DataFormat.Update.UpdateRequestBuilder Update
