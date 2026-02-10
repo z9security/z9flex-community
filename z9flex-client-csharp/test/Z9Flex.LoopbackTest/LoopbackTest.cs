@@ -123,8 +123,12 @@ public class LoopbackTest
             _app.MapGet($"/{name}/show/{{id}}", (string id) =>
             {
                 var store = stores[name];
-                if (!store.TryGetValue(int.Parse(id), out var obj))
-                    return Results.NotFound();
+                JsonObject? obj = null;
+                if (int.TryParse(id, out var numericId))
+                    store.TryGetValue(numericId, out obj);
+                else
+                    obj = store.Values.FirstOrDefault(v => v["uuid"]?.GetValue<string>() == id);
+                if (obj == null) return Results.NotFound();
                 var result = new JsonObject { ["instance"] = obj.DeepClone() };
                 return Results.Content(result.ToJsonString(), "application/json");
             });
@@ -416,6 +420,14 @@ public class LoopbackTest
         // --- Upsert ---
 
         await TestUpsertSched();
+
+        // --- UUID-based show and delete ---
+
+        await TestUuidShowAndDelete();
+
+        // --- Error paths ---
+
+        await TestErrorPaths();
 
         // --- Terminate ---
 
@@ -995,5 +1007,68 @@ public class LoopbackTest
         // Cleanup
         await _client.Sched.DeletePath[newUuid].PostAsync();
         Assert.That((await _client.Sched.List.GetAsync())!.InstanceList!.Any(s => s.Uuid == newUuid), Is.False);
+    }
+
+    // --- UUID-based show and delete ---
+
+    private async Task TestUuidShowAndDelete()
+    {
+        // Save a cred, capture its UUID
+        var save = await _client.Cred.Save.PostAsSavePostResponseAsync(
+            new Cred { Name = "UUID Test Cred", Enabled = true });
+        var unid = save!.Instance!.Unid!.Value;
+        var uuid = save.Instance.Uuid!;
+
+        // Show by UUID
+        var showByUuid = await _client.Cred.Show[uuid].GetAsShowGetResponseAsync();
+        Assert.That(showByUuid!.Instance!.Name, Is.EqualTo("UUID Test Cred"));
+        Assert.That(showByUuid.Instance.Unid, Is.EqualTo(unid));
+
+        // Show by unid still works
+        var showByUnid = await _client.Cred.Show[unid.ToString()].GetAsShowGetResponseAsync();
+        Assert.That(showByUnid!.Instance!.Uuid, Is.EqualTo(uuid));
+
+        // Update by UUID
+        var upd = await _client.Cred.Update[uuid]
+            .PostAsUpdatePostResponseAsync(new Cred { Name = "UUID Updated Cred" });
+        Assert.That(upd!.Instance!.Name, Is.EqualTo("UUID Updated Cred"));
+        Assert.That(upd.Instance.Unid, Is.EqualTo(unid));
+
+        // Show by UUID reflects update
+        var showAfter = await _client.Cred.Show[uuid].GetAsShowGetResponseAsync();
+        Assert.That(showAfter!.Instance!.Name, Is.EqualTo("UUID Updated Cred"));
+
+        // Delete by UUID
+        await _client.Cred.DeletePath[uuid].PostAsync();
+        Assert.That((await _client.Cred.List.GetAsync())!.InstanceList!.Any(c => c.Uuid == uuid), Is.False);
+    }
+
+    // --- Error paths ---
+
+    private async Task TestErrorPaths()
+    {
+        // Show non-existent unid → 404
+        var showEx = Assert.ThrowsAsync<ApiException>(async () =>
+            await _client.Sched.Show["999999"].GetAsShowGetResponseAsync());
+        Assert.That(showEx!.ResponseStatusCode, Is.EqualTo(404));
+
+        // Show non-existent UUID → 404
+        var showUuidEx = Assert.ThrowsAsync<ApiException>(async () =>
+            await _client.Sched.Show[Guid.NewGuid().ToString()].GetAsShowGetResponseAsync());
+        Assert.That(showUuidEx!.ResponseStatusCode, Is.EqualTo(404));
+
+        // Update non-existent ID without upsert → 404
+        var updateEx = Assert.ThrowsAsync<ApiException>(async () =>
+            await _client.Sched.Update["999999"]
+                .PostAsUpdatePostResponseAsync(new Sched { Name = "Ghost" }));
+        Assert.That(updateEx!.ResponseStatusCode, Is.EqualTo(404));
+
+        // Update non-existent UUID without upsert → 404
+        var updateUuidEx = Assert.ThrowsAsync<ApiException>(async () =>
+            await _client.Sched.Update[Guid.NewGuid().ToString()]
+                .PostAsUpdatePostResponseAsync(new Sched { Name = "Ghost" }));
+        Assert.That(updateUuidEx!.ResponseStatusCode, Is.EqualTo(404));
+
+        await Task.CompletedTask;
     }
 }
