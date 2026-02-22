@@ -8,14 +8,19 @@
         <Title>Z9.Flex.Community</Title>
         <Authors>Z9 Security</Authors>
         <Description>Z9 Flex Community Profile SDK</Description>
-        <Copyright>Copyright &#169; 2011-2024 Z9 Security</Copyright>
+        <Copyright>Copyright &#169; 2011-2025 Z9 Security</Copyright>
         <PackageProjectUrl>https://github.com/z9security/z9flex-community</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <IncludeSymbols>True</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <Version>1.0.1</Version>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Kiota.Abstractions" Version="1.16.3" />

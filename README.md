@@ -88,3 +88,26 @@ with:
 public Microsoft.Kiota.Abstractions.Time? Start { get; set; }
 public Microsoft.Kiota.Abstractions.Time? Stop { get; set; }
 ```
+
+### Publishing to NuGet
+
+Pushing a version tag triggers the CI pipeline to build and publish the `Z9.Flex.Community` package to nuget.org:
+
+Find the latest version and tag the next:
+
+```bash
+git tag --sort=-v:refname | head -1
+```
+
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+Note: This requires a `NUGET_API_KEY` secret configured in the repository's GitHub Actions settings.
+
+Verify the package is published:
+
+```bash
+curl -s https://api.nuget.org/v3-flatcontainer/z9.flex.community/index.json
+```
